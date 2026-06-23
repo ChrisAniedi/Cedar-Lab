@@ -23,7 +23,7 @@ export default function ContactForm() {
       setSent(true);
     } catch {
       setBusy(false);
-      alert('Something went wrong — please email hello@buildsprint.io');
+      alert('Something went wrong — please email hello@thecedarlab.com');
     }
   }
 

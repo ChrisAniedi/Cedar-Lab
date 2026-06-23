@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import { Stars } from '@/components/Glyphs';
-import WorkGrid from '@/components/WorkGrid';
 import FinalCta from '@/components/FinalCta';
-import { WORK_STATS, PROJECTS, TESTIMONIALS } from '@/lib/site-data';
+import TestimonialCarousel from '@/components/TestimonialCarousel';
+import WorkGrid from '@/components/WorkGrid';
+import { PROJECTS, TESTIMONIALS, WORK_STATS } from '@/lib/site-data';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -31,12 +31,7 @@ export default function Work() {
 
       <section className="sec"><div className="wrap">
         <div className="sec-head center reveal"><span className="kicker">Testimonials</span><h2 className="title">What clients say.</h2></div>
-        <div className="test-grid">{TESTIMONIALS.map((t, i) => (
-          <div className={`tcard reveal d${i % 3}`} key={t.name}><Stars />
-            <p className="q">&ldquo;{t.quote}&rdquo;</p>
-            <div className="who"><span className="av" style={{ background: t.color }}>{t.initials}</span><div><div className="nm">{t.name}</div><div className="rl">{t.role}</div></div></div>
-          </div>
-        ))}</div>
+        <TestimonialCarousel testimonials={TESTIMONIALS} />
       </div></section>
 
       <FinalCta />

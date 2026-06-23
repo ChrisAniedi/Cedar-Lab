@@ -1,6 +1,6 @@
-# BuildSprint — Next.js + TypeScript + Tailwind
+# Ceda Lab — Next.js + TypeScript + Tailwind
 
-Marketing site for **BuildSprint**, built with the **Next.js App Router**, **TypeScript**,
+Marketing site for **Ceda Lab**, built with the **Next.js App Router**, **TypeScript**,
 and **Tailwind CSS**. Pages are server-rendered from typed data (`lib/site-data.ts`), the
 case-study modal and contact form are client components, and the contact form posts to a
 real **Route Handler** at `/api/contact`.

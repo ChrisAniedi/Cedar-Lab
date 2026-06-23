@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -5,7 +6,7 @@ export default function Footer() {
     <footer><div className="wrap">
       <div className="foot-top">
         <div className="foot-brand">
-          <Link className="logo" href="/"><span className="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 13h6l-1 9 9-13h-6l1-7Z" fill="#0B1300" /></svg></span>BuildSprint</Link>
+          <Link className="logo" href="/"><Image src="/cedalab-logo.png" alt="Ceda Lab Logo" width={120} height={120} /></Link>
           <p>From idea to launch in weeks, not months. Your complete product partner — strategy, design, development, AI, and support.</p>
         </div>
         <div className="foot-col"><h5>Company</h5>
@@ -17,11 +18,11 @@ export default function Footer() {
         <div className="news">
           <label>Get product insights</label>
           <div className="field2"><input type="email" placeholder="you@company.com" aria-label="Email" /><button className="subb">Join</button></div>
-          <div className="contact2"><a href="mailto:hello@buildsprint.io">hello@buildsprint.io</a><br />Remote-first · US / UK / EU / CA / Africa</div>
+          <div className="contact2"><a href="mailto:hello@thecedarlab.com">hello@thecedarlab.com</a><br />Remote-first · US / UK / EU / CA / Africa</div>
         </div>
       </div>
       <div className="foot-bottom">
-        <div className="stmt">Building products, platforms, and AI-powered solutions for ambitious companies worldwide. © 2026 BuildSprint.</div>
+        <div className="stmt">Building products, platforms, and AI-powered solutions for ambitious companies worldwide. © 2026 Ceda Lab.</div>
         <div className="socials">
           <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18 2h3l-7 8 8 12h-6l-5-7-5 7H-1l8-9L0 2h6l4 6 4-6h4Z" transform="translate(2)" /></svg></a>
           <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3 9h2v12H3V9Zm5 0h2v2c.6-1 2-2 4-2 3 0 4 2 4 5v7h-2v-6c0-2-.5-3-2-3s-2 1-2 3v6H8V9Z" /></svg></a>

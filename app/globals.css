@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* BuildSprint design system, ported into the Tailwind pipeline.
+/* Ceda Lab design system, ported into the Tailwind pipeline.
    Tokens mirrored in tailwind.config.js so utilities (text-acc, bg-bg1, font-serif) exist. */
 
 /* ---- home system: hero, ticker, product mockups, trust ---- */
@@ -631,6 +631,21 @@ header.scrolled{background:rgba(8,9,10,.72);backdrop-filter:blur(16px);border-bo
 .tcard .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:16px;color:var(--acc-ink);flex:none}
 .tcard .who .nm{font-weight:600;font-size:14.5px}
 .tcard .who .rl{font-size:12.5px;color:var(--ink-3);font-family:var(--mono)}
+
+/* carousel */
+.carousel-container{width:100%;margin:0 auto}
+.carousel-wrapper{overflow:hidden;border-radius:var(--r-lg)}
+.carousel-track{display:flex;transition:transform 0.5s ease;width:100%}
+.carousel-slide{min-width:100%;flex-shrink:0;padding:0 12px}
+.carousel-slide .tcard{margin-bottom:0}
+.carousel-controls{display:flex;justify-content:center;align-items:center;gap:24px;margin-top:24px}
+.carousel-btn{background:none;border:1px solid var(--line);border-radius:50%;width:44px;height:44px;display:grid;place-items:center;cursor:pointer;font-size:18px;color:var(--ink);transition:.3s var(--ease);flex-shrink:0}
+.carousel-btn:hover{border-color:var(--acc);color:var(--acc);background:rgba(199,247,80,.05)}
+.carousel-dots{display:flex;gap:8px;justify-content:center}
+.carousel-dots .dot{width:10px;height:10px;border-radius:50%;background:var(--line-2);border:none;cursor:pointer;transition:.3s var(--ease)}
+.carousel-dots .dot.active{background:var(--acc);width:28px;border-radius:5px}
+.carousel-dots .dot:hover{background:var(--line)}
+
 /* faq */
 .faq{max-width:760px;margin:0 auto}
 .fitem{border-bottom:1px solid var(--line)}

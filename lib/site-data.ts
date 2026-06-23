@@ -89,18 +89,18 @@ export const INDUSTRIES: Industry[] = [
 ];
 
 export const WORK_STATS: Stat[] = [
-  { n: '200+', l: 'Products shipped' }, { n: '5', l: 'Global markets' },
+  { n: '50+', l: 'Products shipped' }, { n: '5', l: 'Global markets' },
   { n: '4.9', l: 'Avg client rating' }, { n: 'Weeks', l: 'Not months, to launch' },
 ];
 export const ABOUT_STATS: Stat[] = [
-  { n: '200+', l: 'Products shipped' }, { n: '5', l: 'Markets served' },
+  { n: '50+', l: 'Products shipped' }, { n: '5', l: 'Markets served' },
   { n: '90%', l: 'Clients who return' }, { n: '4.9', l: 'Avg client rating' },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
   { quote: "We went from a Figma file to a live, paying-user MVP in five weeks. The launch speed was unlike any agency we'd worked with.", name: 'Adaeze Mbaka', role: 'Founder, FlowPay', initials: 'AM', color: '#C7F750' },
   { quote: 'The product quality is genuinely high-end. Our investors thought we had a 10-person engineering team behind it.', name: 'James Reyes', role: 'CEO, ScaleWorks', initials: 'JR', color: '#8FB3FF' },
-  { quote: 'Every milestone hit on time. Reliable delivery is rare — BuildSprint made it feel normal.', name: 'Sofia Kowalski', role: 'COO, Atlas Logistics', initials: 'SK', color: '#F7C25A' },
+  { quote: 'Every milestone hit on time. Reliable delivery is rare — Ceda Lab made it feel normal.', name: 'Sofia Kowalski', role: 'COO, Atlas Logistics', initials: 'SK', color: '#F7C25A' },
   { quote: 'Communication was effortless. Daily updates, clear demos, zero guesswork. I always knew where things stood.', name: 'Daniel Okafor', role: 'Founder, HomeFix Pro', initials: 'DO', color: '#C7F750' },
   { quote: "Two years in, they still maintain and improve our platform. It's a real partnership, not a one-off build.", name: 'Elena Voss', role: 'Director, Bridge Capital', initials: 'EV', color: '#B79CFF' },
 ];

@@ -1,12 +1,19 @@
-import Link from 'next/link';
-import { Icon } from '@/lib/icons';
-import { Check, Cross, Stars, Arrow } from '@/components/Glyphs';
 import BuildCard from '@/components/BuildCard';
-import ProjectCard from '@/components/ProjectCard';
 import FinalCta from '@/components/FinalCta';
+import { Arrow, Check, Cross } from '@/components/Glyphs';
+import ProjectCard from '@/components/ProjectCard';
+import TestimonialCarousel from '@/components/TestimonialCarousel';
+import { Icon } from '@/lib/icons';
 import {
-  BUILDS, TRUST_LOGOS, STAGES, PROCESS, TIMELINES, PROJECTS, SERVICE_CATS, TESTIMONIALS,
+  BUILDS,
+  PROCESS,
+  PROJECTS, SERVICE_CATS,
+  STAGES,
+  TESTIMONIALS,
+  TIMELINES,
+  TRUST_LOGOS,
 } from '@/lib/site-data';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -32,7 +39,7 @@ export default function Home() {
             <span className="roll"><ul><li>SaaS dashboards</li><li>AI agents</li><li>Mobile apps</li><li>CRM systems</li><li>Marketplaces</li><li>Landing pages</li><li>Internal tools</li></ul></span>
           </div>
           <div className="win w-dash">
-            <div className="bar"><i /><i /><i /><span className="url">app.buildsprint.io</span></div>
+            <div className="bar"><i /><i /><i /><span className="url">app.cedalab.io</span></div>
             <div className="body">
               <div className="row">
                 <div className="stat"><div className="n">$48.2k</div><div className="l">Revenue</div></div>
@@ -105,12 +112,12 @@ export default function Home() {
       </div></section>
 
       <section className="sec" id="why"><div className="wrap">
-        <div className="sec-head center reveal"><span className="kicker">Why BuildSprint</span><h2 className="title">Built differently, on purpose.</h2>
+        <div className="sec-head center reveal"><span className="kicker">Why Ceda Lab</span><h2 className="title">Built differently, on purpose.</h2>
           <p className="lead">Most agencies juggle vendors and stretch timelines. We&apos;re a single, product-first team that ships.</p></div>
         <div className="cmp">
           <div className="col trad reveal"><div className="ch"><span className="tagx">Old Way</span><span className="b">Traditional Agency</span></div>
             <ul><li><Cross />Slow, drawn-out delivery</li><li><Cross />Multiple disconnected vendors</li><li><Cross />Limited support after launch</li><li><Cross />No real product strategy</li></ul></div>
-          <div className="col bs reveal d1"><div className="ch"><span className="tagx">BuildSprint</span><span className="b">The Sprint Way</span></div>
+          <div className="col bs reveal d1"><div className="ch"><span className="tagx">Ceda Lab</span><span className="b">The Sprint Way</span></div>
             <ul><li><Check />Fast, predictable execution</li><li><Check />End-to-end delivery, one team</li><li><Check />A dedicated, senior team</li><li><Check />Product-first thinking</li><li><Check />AI capabilities built in</li><li><Check />Long-term partnership &amp; support</li></ul></div>
         </div>
       </div></section>
@@ -125,13 +132,7 @@ export default function Home() {
 
       <section className="sec"><div className="wrap">
         <div className="sec-head center reveal"><span className="kicker">Testimonials</span><h2 className="title">Loved by the people who ship with us.</h2></div>
-        <div className="test-grid">{TESTIMONIALS.map((t, i) => (
-          <div className={`tcard reveal d${i % 3}`} key={t.name}>
-            <Stars />
-            <p className="q">&ldquo;{t.quote}&rdquo;</p>
-            <div className="who"><span className="av" style={{ background: t.color }}>{t.initials}</span><div><div className="nm">{t.name}</div><div className="rl">{t.role}</div></div></div>
-          </div>
-        ))}</div>
+        <TestimonialCarousel testimonials={TESTIMONIALS} />
       </div></section>
 
       <FinalCta />

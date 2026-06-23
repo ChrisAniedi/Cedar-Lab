@@ -1,8 +1,10 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const links = [
+  { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/work', label: 'Work' },
   { href: '/about', label: 'About' },
@@ -14,8 +16,7 @@ export default function Nav() {
   return (
     <header id="hdr"><div className="wrap"><nav className="nav">
       <Link className="logo" href="/">
-        <span className="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 13h6l-1 9 9-13h-6l1-7Z" fill="#0B1300" /></svg></span>
-        BuildSprint
+        <Image src="/cedalab-logo.png" alt="Ceda Lab Logo" width={120} height={120} />
       </Link>
       <div className="nav-links">
         {links.map((l) => (

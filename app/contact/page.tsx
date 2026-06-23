@@ -1,6 +1,6 @@
-import type { Metadata } from 'next';
-import { Icon } from '@/lib/icons';
 import ContactForm from '@/components/ContactForm';
+import { Icon } from '@/lib/icons';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -29,7 +29,7 @@ export default function Contact() {
         <div className="form-card reveal"><ContactForm /></div>
         <div className="side">
           <div className="sidecard reveal d1"><h4>Reach us directly</h4>
-            <div className="item"><div className="si"><Icon name="mail" /></div><div><div className="st"><a href="mailto:hello@buildsprint.io">hello@buildsprint.io</a></div><div className="ss">For new projects &amp; partnerships</div></div></div>
+            <div className="item"><div className="si"><Icon name="mail" /></div><div><div className="st"><a href="mailto:hello@thecedarlab.com">hello@thecedarlab.com</a></div><div className="ss">For new projects &amp; partnerships</div></div></div>
             <div className="item"><div className="si"><Icon name="clock" /></div><div><div className="st">~1 business day</div><div className="ss">Typical response time</div></div></div>
             <div className="item"><div className="si"><Icon name="globe" /></div><div><div className="st">Remote-first</div><div className="ss">US · UK · EU · Canada · Africa</div></div></div>
           </div>
