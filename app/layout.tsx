@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     'Ceda Lab designs, builds, automates and launches SaaS platforms, AI products, websites, MVPs and internal tools for businesses worldwide.',
   icons: {
-    icon: '/cedalab-logo.png',
+    icon: '/favicon.svg',
   },
 };
 

@@ -101,7 +101,14 @@ header.scrolled{background:rgba(8,9,10,.72);backdrop-filter:blur(16px);border-bo
 
 /* ============ HERO ============ */
 .hero{padding:160px 0 70px}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(170,239,90,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(170,239,90,0.04) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(115% 80% at 70% 25%,#000 35%,transparent 78%);
+  mask-image:radial-gradient(115% 80% at 70% 25%,#000 35%,transparent 78%);
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
 .hero h1{font-size:clamp(40px,6.2vw,76px);font-weight:800;margin:24px 0 22px}
 .hero h1 .em{color:var(--acc);font-style:normal;position:relative}
 .hero h1 .em::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.07em;background:var(--acc);opacity:.32;border-radius:2px}
@@ -124,7 +131,7 @@ header.scrolled{background:rgba(8,9,10,.72);backdrop-filter:blur(16px);border-bo
 @keyframes roll{0%,11%{transform:translateY(0)}16%,27%{transform:translateY(-1.3em)}33%,44%{transform:translateY(-2.6em)}50%,61%{transform:translateY(-3.9em)}66%,77%{transform:translateY(-5.2em)}83%,94%{transform:translateY(-6.5em)}100%{transform:translateY(-7.8em)}}
 
 /* hero visual - product constellation */
-.stage{position:relative;height:520px}
+.stage{position:relative;margin-top:46px}
 .win{
   position:absolute;border-radius:16px;border:1px solid var(--line-2);overflow:hidden;
   box-shadow:0 40px 90px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.02);
@@ -384,7 +391,7 @@ footer{border-top:1px solid var(--line);padding:72px 0 40px;position:relative;z-
 /* ============ RESPONSIVE ============ */
 @media(max-width:980px){
   .hero-grid{grid-template-columns:1fr;gap:30px}
-  .stage{height:440px;max-width:440px;margin:0 auto}
+  .stage{max-width:520px;margin:0 auto}
   .nav-links{display:none}
   .menu-btn{display:block}
   .proc-wrap{grid-template-columns:1fr;gap:36px}
@@ -403,8 +410,7 @@ footer{border-top:1px solid var(--line);padding:72px 0 40px;position:relative;z-
   .serv-grid{grid-template-columns:1fr}
   .test-grid{columns:1}
   .foot-top{grid-template-columns:1fr}
-  .stage{height:400px;max-width:340px}
-  .w-ai{width:220px}
+  .stage{max-width:380px}
   .sec{padding:70px 0}
   .nav-cta .btn-ghost{display:none}
 }
@@ -632,19 +638,15 @@ header.scrolled{background:rgba(8,9,10,.72);backdrop-filter:blur(16px);border-bo
 .tcard .who .nm{font-weight:600;font-size:14.5px}
 .tcard .who .rl{font-size:12.5px;color:var(--ink-3);font-family:var(--mono)}
 
-/* carousel */
-.carousel-container{width:100%;margin:0 auto}
-.carousel-wrapper{overflow:hidden;border-radius:var(--r-lg)}
-.carousel-track{display:flex;transition:transform 0.5s ease;width:100%}
-.carousel-slide{min-width:100%;flex-shrink:0;padding:0 12px}
-.carousel-slide .tcard{margin-bottom:0}
-.carousel-controls{display:flex;justify-content:center;align-items:center;gap:24px;margin-top:24px}
-.carousel-btn{background:none;border:1px solid var(--line);border-radius:50%;width:44px;height:44px;display:grid;place-items:center;cursor:pointer;font-size:18px;color:var(--ink);transition:.3s var(--ease);flex-shrink:0}
-.carousel-btn:hover{border-color:var(--acc);color:var(--acc);background:rgba(199,247,80,.05)}
-.carousel-dots{display:flex;gap:8px;justify-content:center}
-.carousel-dots .dot{width:10px;height:10px;border-radius:50%;background:var(--line-2);border:none;cursor:pointer;transition:.3s var(--ease)}
-.carousel-dots .dot.active{background:var(--acc);width:28px;border-radius:5px}
-.carousel-dots .dot:hover{background:var(--line)}
+/* testimonial marquee — slow continuous slide, 3–4 cards visible */
+.tmarquee{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.tmarquee-track{display:flex;width:max-content;animation:tscroll 60s linear infinite}
+.tmarquee:hover .tmarquee-track{animation-play-state:paused}
+.tmarquee .tcard{width:clamp(300px,30vw,400px);flex:none;margin:0 24px 0 0;display:flex;flex-direction:column}
+.tmarquee .tcard .q{flex:1}
+@keyframes tscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:640px){.tmarquee .tcard{width:82vw}.tmarquee-track{animation-duration:40s}}
+@media (prefers-reduced-motion:reduce){.tmarquee-track{animation:none}}
 
 /* faq */
 .faq{max-width:760px;margin:0 auto}

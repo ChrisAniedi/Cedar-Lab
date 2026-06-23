@@ -1,5 +1,6 @@
 import BuildCard from '@/components/BuildCard';
 import FinalCta from '@/components/FinalCta';
+import HeroVisual from '@/components/HeroVisual';
 import { Arrow, Check, Cross } from '@/components/Glyphs';
 import ProjectCard from '@/components/ProjectCard';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
@@ -34,42 +35,12 @@ export default function Home() {
           </div>
         </div>
         <div className="stage reveal d2">
-          <div className="ticker" style={{ position: 'absolute', top: '-6px', left: 0, zIndex: 9 }}>
-            <span className="dot" />Now building:
-            <span className="roll"><ul><li>SaaS dashboards</li><li>AI agents</li><li>Mobile apps</li><li>CRM systems</li><li>Marketplaces</li><li>Landing pages</li><li>Internal tools</li></ul></span>
-          </div>
-          <div className="win w-dash">
-            <div className="bar"><i /><i /><i /><span className="url">app.cedalab.io</span></div>
-            <div className="body">
-              <div className="row">
-                <div className="stat"><div className="n">$48.2k</div><div className="l">Revenue</div></div>
-                <div className="stat"><div className="n">+24%</div><div className="l">Growth</div></div>
-                <div className="stat"><div className="n">1,204</div><div className="l">Users</div></div>
-              </div>
-              <div className="chart">{['55%', '72%', '48%', '88%', '65%', '95%'].map((h, i) => <span key={i} style={{ height: h }} />)}</div>
-            </div>
-          </div>
-          <div className="win w-ai">
-            <div className="bar"><i /><i /><i /><span className="url">AI Agent</span></div>
-            <div className="body">
-              <div className="bub u">Summarize today&apos;s support tickets</div>
-              <div className="bub a"><span className="agent">◆ Support Agent</span>42 tickets resolved, 3 escalated. Avg response: 1m 12s.</div>
-              <div className="bub u">Draft replies for the 3 open ones</div>
-              <div className="typing"><i /><i /><i /></div>
-            </div>
-          </div>
-          <div className="win w-mob"><div className="notch" />
-            <div className="m-body"><div className="m-hd">Bookings</div>
-              <div className="card"><div className="t">This week</div><div className="v">+38</div></div>
-              <div className="card"><div className="t">Conversion</div><div className="v">6.4%</div></div>
-              <span className="pill">● LIVE</span>
-            </div>
-          </div>
+          <HeroVisual />
         </div>
       </div>
       <div className="wrap"><div className="trust reveal">
         <p>Trusted by startups, growing businesses, and enterprise teams worldwide</p>
-        <div className="logos">{TRUST_LOGOS.map((l) => <span className="cl" key={l}><span className="g" />{l}</span>)}</div>
+        <div className="logos">{TRUST_LOGOS.map((l) => <span className="cl" key={l}>{/* <span className="g" /> placeholder logo shape — hidden until real company logos are available */}{l}</span>)}</div>
       </div></div>
       </section>
 

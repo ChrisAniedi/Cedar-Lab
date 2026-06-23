@@ -22,7 +22,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="foot-bottom">
-        <div className="stmt">Building products, platforms, and AI-powered solutions for ambitious companies worldwide. © 2026 Ceda Lab.</div>
+        <div className="stmt">Building products, platforms, and AI-powered solutions for ambitious companies worldwide. © 2026 Cedar Lab.</div>
         <div className="socials">
           <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18 2h3l-7 8 8 12h-6l-5-7-5 7H-1l8-9L0 2h6l4 6 4-6h4Z" transform="translate(2)" /></svg></a>
           <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3 9h2v12H3V9Zm5 0h2v2c.6-1 2-2 4-2 3 0 4 2 4 5v7h-2v-6c0-2-.5-3-2-3s-2 1-2 3v6H8V9Z" /></svg></a>

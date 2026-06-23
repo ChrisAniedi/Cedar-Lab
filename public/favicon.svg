@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" width="2000" height="2000">
+  <rect width="2000" height="2000" fill="#1f1f1f"/>
+  <g fill="#b4f03c">
+    <!-- top vertical tabs -->
+    <rect x="600" y="290" width="340" height="380" rx="90"/>
+    <rect x="1060" y="290" width="340" height="380" rx="90"/>
+    <!-- bottom vertical tabs -->
+    <rect x="600" y="1330" width="340" height="380" rx="90"/>
+    <rect x="1060" y="1330" width="340" height="380" rx="90"/>
+    <!-- upper horizontal tabs -->
+    <rect x="290" y="600" width="380" height="340" rx="90"/>
+    <rect x="1330" y="600" width="380" height="340" rx="90"/>
+    <!-- lower horizontal tabs -->
+    <rect x="290" y="1060" width="380" height="340" rx="90"/>
+    <rect x="1330" y="1060" width="380" height="340" rx="90"/>
+  </g>
+</svg>
