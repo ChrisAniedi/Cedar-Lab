@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: 'Why Ceda Lab exists: a product-first team that takes companies from idea to launch in weeks, not months.',
 };
 
+
 export default function About() {
   return (
     <>
