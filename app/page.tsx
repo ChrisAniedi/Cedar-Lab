@@ -77,9 +77,15 @@ export default function Home() {
       </div></section>
 
       <section className="sec" id="work"><div className="wrap">
-        <div className="sec-head reveal"><span className="kicker">Featured Projects</span><h2 className="title">Real products. Measurable results.</h2></div>
-        <div className="proj-grid">{PROJECTS.slice(0, 4).map((p, i) => <ProjectCard key={p.id} p={p} className={`reveal d${i % 2}`} />)}</div>
-        <div style={{ textAlign: 'center', marginTop: 34 }} className="reveal"><Link href="/work" className="btn btn-ghost">See all work <Arrow /></Link></div>
+        <div className="work-head reveal">
+          <div>
+            <span className="kicker">Featured Work</span>
+            <h2 className="title">Outcomes, not just outputs.</h2>
+            <p className="lead">Real projects, real results. See how we&apos;ve helped clients across industries.</p>
+          </div>
+          <Link href="/work" className="btn btn-ghost">View more <Arrow /></Link>
+        </div>
+        <div className="proj-grid">{PROJECTS.slice(0, 6).map((p, i) => <ProjectCard key={p.id} p={p} className={`reveal d${i % 3}`} />)}</div>
       </div></section>
 
       <section className="sec" id="why"><div className="wrap">

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hovra — Property Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --brand: #1A4FBA; --brand-hover: #1640A0; --brand-light: #EEF3FF; --brand-mid: #4B77CC;
+  --green: #10B981; --green-light: #ECFDF5;
+  --amber: #F59E0B; --amber-light: #FFFBEB;
+  --red: #EF4444; --red-light: #FEF2F2;
+  --g50: #F8FAFC; --g100: #F1F5F9; --g200: #E2E8F0; --g300: #CBD5E1;
+  --g400: #94A3B8; --g500: #64748B; --g600: #475569; --g700: #334155;
+  --g800: #1E293B; --g900: #0F172A; --white: #FFFFFF;
+  --ui: 'Inter', sans-serif; --display: 'Plus Jakarta Sans', sans-serif;
+}
+
+html, body { width: 1280px; height: 800px; overflow: hidden; }
+body { font-family: var(--ui); font-size: 13px; -webkit-font-smoothing: antialiased; display: flex; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 240px; background: var(--g900);
+  display: flex; flex-direction: column;
+  flex-shrink: 0; height: 800px; overflow: hidden;
+}
+.sidebar-logo {
+  display: flex; align-items: center; gap: 9px;
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.logo-mark { width: 30px; height: 30px; background: var(--brand); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.logo-text { font-family: var(--display); font-size: 16px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+.ss { padding: 20px 10px 6px; }
+.ss-lbl { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; color: var(--g500); padding: 0 8px; margin-bottom: 4px; }
+.ni {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 10px; border-radius: 7px;
+  color: var(--g400); cursor: pointer; font-size: 13px; font-weight: 450;
+  transition: all 0.12s; margin-bottom: 1px;
+}
+.ni:hover { background: rgba(255,255,255,0.06); color: white; }
+.ni.on { background: var(--brand); color: white; }
+.ni svg { width: 17px; height: 17px; flex-shrink: 0; opacity: 0.7; }
+.ni.on svg { opacity: 1; }
+.nb { margin-left: auto; background: rgba(255,255,255,0.15); border-radius: 10px; font-size: 10px; font-weight: 600; padding: 1px 7px; color: white; }
+.ni.on .nb { background: rgba(255,255,255,0.25); }
+.sf { margin-top: auto; padding: 12px 10px; border-top: 1px solid rgba(255,255,255,0.06); }
+.urow { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.urow:hover { background: rgba(255,255,255,0.06); }
+.uav { width: 30px; height: 30px; border-radius: 50%; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; }
+.uname { font-size: 12px; font-weight: 600; color: white; }
+.urole { font-size: 11px; color: var(--g500); }
+
+/* ── MAIN ── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--g50); }
+.topbar { background: white; border-bottom: 1px solid var(--g200); display: flex; align-items: center; padding: 0 24px; height: 54px; gap: 12px; flex-shrink: 0; }
+.tb-title { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--g900); }
+.tb-org { margin-left: 10px; color: var(--g400); font-size: 12px; display: flex; align-items: center; gap: 4px; }
+.tb-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.btn { display: flex; align-items: center; gap: 6px; padding: 7px 13px; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; font-family: var(--ui); }
+.btn-sec { background: var(--g100); color: var(--g700); border: 1px solid var(--g200); }
+.btn-pri { background: var(--brand); color: white; }
+.sbox { display: flex; align-items: center; gap: 7px; padding: 6px 11px; background: var(--g100); border-radius: 7px; border: 1px solid var(--g200); width: 210px; }
+.sbox input { border: none; background: transparent; font-size: 12.5px; color: var(--g700); outline: none; font-family: var(--ui); width: 100%; }
+.sbox input::placeholder { color: var(--g400); }
+.nbtn { width: 34px; height: 34px; border-radius: 7px; background: var(--g100); border: 1px solid var(--g200); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+.ndot { width: 7px; height: 7px; background: var(--red); border: 1.5px solid white; border-radius: 50%; position: absolute; top: 5px; right: 5px; }
+
+/* ── CONTENT ── */
+.content { flex: 1; overflow-y: auto; padding: 22px 24px; }
+.content::-webkit-scrollbar { width: 4px; }
+.content::-webkit-scrollbar-thumb { background: var(--g200); border-radius: 3px; }
+
+/* ── SCREENS ── */
+.scr { display: none; }
+.scr.on { display: block; }
+
+/* ── STATS ── */
+.sr { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
+.sc { background: white; border-radius: 10px; padding: 18px 20px; border: 1px solid var(--g200); }
+.sc-lbl { font-size: 11.5px; color: var(--g500); font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+.sc-ic { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+.sc-v { font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--g900); letter-spacing: -0.5px; line-height: 1; margin-bottom: 6px; }
+.sc-d { font-size: 11.5px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+.up { color: var(--green); } .dn { color: var(--red); } .neu { color: var(--g400); }
+
+/* ── CARD ── */
+.card { background: white; border-radius: 10px; border: 1px solid var(--g200); overflow: hidden; }
+.ch { display: flex; align-items: center; justify-content: space-between; padding: 15px 18px 12px; border-bottom: 1px solid var(--g100); }
+.ct { font-size: 13px; font-weight: 650; color: var(--g900); }
+.ca { font-size: 11.5px; color: var(--brand); font-weight: 500; cursor: pointer; }
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; }
+thead th { background: var(--g50); font-size: 11px; font-weight: 600; color: var(--g500); text-transform: uppercase; letter-spacing: 0.5px; padding: 9px 14px; text-align: left; border-bottom: 1px solid var(--g200); }
+tbody tr { border-bottom: 1px solid var(--g100); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--g50); }
+tbody td { padding: 11px 14px; font-size: 12.5px; color: var(--g700); vertical-align: middle; }
+.tc { display: flex; align-items: center; gap: 9px; }
+.av { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; flex-shrink: 0; }
+.avsm { width: 24px; height: 24px; font-size: 9px; }
+.tn { font-weight: 500; color: var(--g800); font-size: 12.5px; }
+.ts { font-size: 11px; color: var(--g400); }
+.amt { font-family: var(--display); font-weight: 600; font-size: 12.5px; color: var(--g800); }
+.tfoot { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-top: 1px solid var(--g100); }
+.tfi { font-size: 11.5px; color: var(--g400); }
+.pgs { display: flex; gap: 4px; }
+.pg { width: 26px; height: 26px; border-radius: 5px; border: 1px solid var(--g200); background: white; font-size: 11.5px; font-weight: 500; color: var(--g600); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.pg.on { background: var(--brand); color: white; border-color: var(--brand); }
+
+/* ── BADGES ── */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.bg { background: var(--green-light); color: #059669; }
+.ba { background: var(--amber-light); color: #D97706; }
+.br { background: var(--red-light); color: #DC2626; }
+.bb { background: var(--brand-light); color: var(--brand); }
+.bgr { background: var(--g100); color: var(--g500); }
+.dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── FILTER TABS ── */
+.ftabs { display: flex; gap: 2px; background: var(--g100); border-radius: 8px; padding: 3px; }
+.ft { padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; color: var(--g500); cursor: pointer; }
+.ft.on { background: white; color: var(--g800); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+/* ── LAYOUT ── */
+.g31 { display: grid; grid-template-columns: 1.9fr 1fr; gap: 14px; margin-bottom: 14px; }
+.g21 { display: grid; grid-template-columns: 1.8fr 1fr; gap: 14px; margin-bottom: 14px; }
+.col { display: flex; flex-direction: column; gap: 14px; }
+.mb14 { margin-bottom: 14px; }
+
+/* ── MAINT ITEMS ── */
+.mi { display: flex; align-items: flex-start; gap: 11px; padding: 13px 16px; border-bottom: 1px solid var(--g100); }
+.mi:last-child { border-bottom: none; }
+.mi-ic { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mi-b { flex: 1; min-width: 0; }
+.mi-t { font-size: 12.5px; font-weight: 600; color: var(--g800); margin-bottom: 2px; }
+.mi-s { font-size: 11.5px; color: var(--g500); }
+.mi-m { font-size: 11px; color: var(--g400); margin-top: 3px; }
+
+/* ── BAR CHART ── */
+.rbars { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin-bottom: 8px; }
+.rbc { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+.rbb { width: 100%; border-radius: 4px 4px 0 0; background: var(--brand-light); }
+.rbb.on { background: var(--brand); }
+.rbl { font-size: 10px; color: var(--g400); font-weight: 500; }
+
+/* ── UNIT CARDS ── */
+.ugrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 14px; }
+.uc { background: white; border-radius: 10px; border: 1px solid var(--g200); padding: 16px; cursor: pointer; transition: box-shadow 0.15s; }
+.uc:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.uc-h { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.uc-n { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--g900); }
+.uc-p { font-size: 11.5px; color: var(--g500); margin-top: 1px; }
+.uc-t { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.uc-tn { font-size: 12px; font-weight: 500; color: var(--g800); }
+.uc-st { display: flex; gap: 12px; padding-top: 10px; border-top: 1px solid var(--g100); }
+.ucs { display: flex; flex-direction: column; gap: 2px; }
+.ucs-l { font-size: 10px; color: var(--g400); font-weight: 500; }
+.ucs-v { font-size: 12px; font-weight: 600; color: var(--g700); }
+
+/* ── OCC BARS ── */
+.or { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.or:last-child { margin-bottom: 0; }
+.ol { font-size: 12px; color: var(--g600); width: 120px; flex-shrink: 0; }
+.ow { flex: 1; height: 7px; background: var(--g100); border-radius: 4px; overflow: hidden; }
+.of { height: 100%; border-radius: 4px; }
+.op { font-size: 12px; font-weight: 600; color: var(--g700); width: 34px; text-align: right; flex-shrink: 0; }
+.oc { font-size: 11px; color: var(--g400); width: 44px; text-align: right; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="white"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="white" opacity="0.6"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="white" opacity="0.6"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="white" opacity="0.3"/></svg>
+    </div>
+    <span class="logo-text">hovra</span>
+  </div>
+  <div class="ss">
+    <div class="ss-lbl">Overview</div>
+    <div class="ni on" id="sn-dashboard" onclick="go('dashboard')">
+      <svg viewBox="0 0 17 17" fill="none"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1.2" fill="currentColor"/><rect x="10" y="1.5" width="5.5" height="5.5" rx="1.2" fill="currentColor" opacity="0.5"/><rect x="1.5" y="10" width="5.5" height="5.5" rx="1.2" fill="currentColor" opacity="0.5"/><rect x="10" y="10" width="5.5" height="5.5" rx="1.2" fill="currentColor" opacity="0.5"/></svg>
+      Dashboard
+    </div>
+  </div>
+  <div class="ss">
+    <div class="ss-lbl">Management</div>
+    <div class="ni" id="sn-units" onclick="go('units')">
+      <svg viewBox="0 0 17 17" fill="none"><rect x="2" y="2" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M2 6h13" stroke="currentColor" stroke-width="1.3"/><path d="M6 10h2M9.5 10h2M6 12.5h2M9.5 12.5h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Units <span class="nb">312</span>
+    </div>
+    <div class="ni" id="sn-tenants" onclick="go('tenants')">
+      <svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 14.5c0-3.314 2.686-5 6-5s6 1.686 6 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Tenants
+    </div>
+    <div class="ni">
+      <svg viewBox="0 0 17 17" fill="none"><path d="M3 4.5h11M3 8.5h7.5M3 12.5h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Leases
+    </div>
+    <div class="ni">
+      <svg viewBox="0 0 17 17" fill="none"><path d="M8.5 2L2 6v9h4.5V11h4v4H15V6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      Properties
+    </div>
+  </div>
+  <div class="ss">
+    <div class="ss-lbl">Operations</div>
+    <div class="ni" id="sn-maintenance" onclick="go('maintenance')">
+      <svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M8.5 5.5v3l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Maintenance <span class="nb">8</span>
+    </div>
+    <div class="ni" id="sn-payments" onclick="go('payments')">
+      <svg viewBox="0 0 17 17" fill="none"><rect x="2" y="3" width="13" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M8.5 7.5v4M6.5 9.5h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Payments
+    </div>
+    <div class="ni">
+      <svg viewBox="0 0 17 17" fill="none"><path d="M3 13l4-4 3 3 4.5-5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Reports
+    </div>
+  </div>
+  <div class="sf">
+    <div class="urow">
+      <div class="uav">AA</div>
+      <div><div class="uname">Adaeze Agu</div><div class="urole">Property Manager</div></div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="tb-title" id="tt">Dashboard</div>
+    <div class="tb-org">Adeyemi Realty Group <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-left:3px"><path d="M3 4.5L6 7.5 9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+    <div class="tb-right">
+      <div class="sbox"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" style="color:var(--g400);flex-shrink:0"><circle cx="5.5" cy="5.5" r="3.5" stroke="currentColor" stroke-width="1.3"/><path d="M8.5 8.5L11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input type="text" placeholder="Search units, tenants…" readonly></div>
+      <div class="nbtn"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="color:var(--g600)"><path d="M7.5 2a4 4 0 0 1 4 4v2.5l1.5 1.5v.5H2v-.5L3.5 8.5V6a4 4 0 0 1 4-4zm0 10a1.5 1.5 0 0 0 1.5-1.5h-3A1.5 1.5 0 0 0 7.5 12z" fill="currentColor" opacity="0.7"/></svg><div class="ndot"></div></div>
+      <button class="btn btn-pri"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg><span id="cta">Add Unit</span></button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="scr on" id="s-dashboard">
+      <div class="sr">
+        <div class="sc"><div class="sc-lbl">Total Units<div class="sc-ic" style="background:var(--brand-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--brand)"><path d="M7 1.5L1.5 5.5v7h3.5V9.5h4V12.5H12.5v-7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div></div><div class="sc-v">312</div><div class="sc-d up"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 8.5V2.5M2 5.5l3.5-3 3.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>+18 this quarter</div></div>
+        <div class="sc"><div class="sc-lbl">Occupied<div class="sc-ic" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--green)"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12.5c0-2.761 2.239-4 5-4s5 1.239 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div></div><div class="sc-v" style="color:var(--green)">299</div><div class="sc-d up"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 8.5V2.5M2 5.5l3.5-3 3.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>96% occupancy rate</div></div>
+        <div class="sc"><div class="sc-lbl">Rent Collected (May)<div class="sc-ic" style="background:#FFF7ED"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:#EA580C"><path d="M7 1v1.5M7 11.5V13M3.5 3.5l1 1M9.5 9.5l1 1M1 7h1.5M11.5 7H13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="font-size:22px">₦84.2M</div><div class="sc-d up"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 8.5V2.5M2 5.5l3.5-3 3.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>₦6.1M above target</div></div>
+        <div class="sc"><div class="sc-lbl">Open Requests<div class="sc-ic" style="background:var(--amber-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--amber)"><path d="M7 2.5v4.5M7 9.5v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="color:var(--amber)">8</div><div class="sc-d dn"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 2.5v6M9 6l-3.5 3L2 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>3 past due</div></div>
+      </div>
+      <div class="g31">
+        <div class="card">
+          <div class="ch"><div style="display:flex;align-items:center;gap:12px"><span class="ct">Tenants & Payments</span><div class="ftabs"><div class="ft on">All</div><div class="ft">Overdue</div><div class="ft">Vacating</div></div></div><span class="ca">View all →</span></div>
+          <table><thead><tr><th>Tenant</th><th>Property / Unit</th><th>Lease Ends</th><th>Monthly Rent</th><th>Rent Status</th><th></th></tr></thead><tbody>
+            <tr><td><div class="tc"><div class="av" style="background:#3B82F6">EO</div><div><div class="tn">Emeka Okafor</div><div class="ts">emeka.o@gmail.com</div></div></div></td><td><div style="font-size:12.5px;font-weight:500">Lekki Heights</div><div class="ts">Unit 3B</div></td><td>Aug 2025</td><td><span class="amt">₦280,000</span></td><td><span class="badge bg"><span class="dot" style="background:var(--green)"></span>Paid</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av" style="background:#8B5CF6">NA</div><div><div class="tn">Ngozi Adeyemi</div><div class="ts">n.adeyemi@icloud.com</div></div></div></td><td><div style="font-size:12.5px;font-weight:500">Oniru Estate</div><div class="ts">Flat 7A</div></td><td>Feb 2026</td><td><span class="amt">₦420,000</span></td><td><span class="badge ba"><span class="dot" style="background:var(--amber)"></span>Due in 3 days</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av" style="background:#EF4444">BI</div><div><div class="tn">Babatunde Idowu</div><div class="ts">b.idowu@yahoo.com</div></div></div></td><td><div style="font-size:12.5px;font-weight:500">VI Terrace</div><div class="ts">Unit 12</div></td><td>Nov 2025</td><td><span class="amt">₦650,000</span></td><td><span class="badge br"><span class="dot" style="background:var(--red)"></span>Overdue 14d</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av" style="background:#059669">CE</div><div><div class="tn">Chidinma Eze</div><div class="ts">chidinma@chidinma.ng</div></div></div></td><td><div style="font-size:12.5px;font-weight:500">Ikoyi Annex</div><div class="ts">Studio 2</div></td><td>Jun 2026</td><td><span class="amt">₦195,000</span></td><td><span class="badge bg"><span class="dot" style="background:var(--green)"></span>Paid</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av" style="background:#0EA5E9">AO</div><div><div class="tn">Amara Obi</div><div class="ts">amara.obi@gmail.com</div></div></div></td><td><div style="font-size:12.5px;font-weight:500">Surulere Close</div><div class="ts">Unit 5</div></td><td>Mar 2026</td><td><span class="amt">₦165,000</span></td><td><span class="badge bb"><span class="dot" style="background:var(--brand)"></span>Processing</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av" style="background:#D97706">FF</div><div><div class="tn">Folake Fasanya</div><div class="ts">folake.f@ymail.com</div></div></div></td><td><div style="font-size:12.5px;font-weight:500">Lekki Heights</div><div class="ts">Penthouse 1</div></td><td><span style="color:var(--red);font-weight:600">Vacating Jul '25</span></td><td><span class="amt">₦900,000</span></td><td><span class="badge bgr">Not renewed</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          </tbody></table>
+          <div class="tfoot"><div class="tfi">Showing 1–6 of 299 tenants</div><div class="pgs"><div class="pg">‹</div><div class="pg on">1</div><div class="pg">2</div><div class="pg">3</div><div class="pg">›</div></div></div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="ch"><span class="ct">Maintenance Queue</span><span class="ca">All requests →</span></div>
+            <div class="mi"><div class="mi-ic" style="background:#FEF2F2"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="color:#EF4444"><path d="M8 2.5v5M8 10v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/></svg></div><div class="mi-b"><div class="mi-t">Water heater failure</div><div class="mi-s">VI Terrace · Unit 08</div><div class="mi-m">2h ago · Amaka T.</div></div><span class="badge br">Urgent</span></div>
+            <div class="mi"><div class="mi-ic" style="background:var(--amber-light)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="color:var(--amber)"><path d="M8 2L2.5 12.5h11L8 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div><div class="mi-b"><div class="mi-t">Intercom not working</div><div class="mi-s">Oniru Estate · Block C</div><div class="mi-m">Yesterday · Seun K.</div></div><span class="badge ba">Medium</span></div>
+            <div class="mi"><div class="mi-ic" style="background:var(--brand-light)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="color:var(--brand)"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8l2 2 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div><div class="mi-b"><div class="mi-t">Replace ceiling light</div><div class="mi-s">Lekki Heights · 3B</div><div class="mi-m">2 days ago · Emeka O.</div></div><span class="badge bb">Scheduled</span></div>
+            <div class="mi"><div class="mi-ic" style="background:var(--green-light)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="color:var(--green)"><path d="M4 8.5l2.5 2.5L12 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mi-b"><div class="mi-t">Repaint corridor walls</div><div class="mi-s">Ikoyi Annex · Ground Flr</div><div class="mi-m">Resolved 3 days ago</div></div><span class="badge bg">Done</span></div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct">Monthly Revenue</span><span class="ca">Full report →</span></div>
+            <div style="padding:14px 18px">
+              <div class="rbars"><div class="rbc"><div class="rbb" style="height:52%"></div><div class="rbl">Dec</div></div><div class="rbc"><div class="rbb" style="height:61%"></div><div class="rbl">Jan</div></div><div class="rbc"><div class="rbb" style="height:58%"></div><div class="rbl">Feb</div></div><div class="rbc"><div class="rbb" style="height:71%"></div><div class="rbl">Mar</div></div><div class="rbc"><div class="rbb" style="height:68%"></div><div class="rbl">Apr</div></div><div class="rbc"><div class="rbb on" style="height:88%"></div><div class="rbl" style="color:var(--brand);font-weight:600">May</div></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--g100)"><span style="font-size:11.5px;color:var(--g500)">May 2025 total</span><span style="font-family:var(--display);font-size:15px;font-weight:700;color:var(--g900)">₦84,200,000</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb14">
+        <div class="ch"><span class="ct">Occupancy by Property</span><div style="display:flex;gap:8px;align-items:center"><span style="font-size:11.5px;color:var(--g500)">May 2025</span><span class="ca">View properties →</span></div></div>
+        <div style="padding:14px 18px">
+          <div class="or"><div class="ol">Lekki Heights</div><div class="ow"><div class="of" style="width:100%;background:var(--brand)"></div></div><div class="op">100%</div><div class="oc">72 units</div></div>
+          <div class="or"><div class="ol">Oniru Estate</div><div class="ow"><div class="of" style="width:98%;background:var(--brand)"></div></div><div class="op">98%</div><div class="oc">88 units</div></div>
+          <div class="or"><div class="ol">VI Terrace</div><div class="ow"><div class="of" style="width:96%;background:var(--brand-mid)"></div></div><div class="op">96%</div><div class="oc">54 units</div></div>
+          <div class="or"><div class="ol">Ikoyi Annex</div><div class="ow"><div class="of" style="width:91%;background:var(--brand-mid)"></div></div><div class="op">91%</div><div class="oc">48 units</div></div>
+          <div class="or"><div class="ol">Surulere Close</div><div class="ow"><div class="of" style="width:84%;background:var(--g300)"></div></div><div class="op">84%</div><div class="oc">50 units</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNITS -->
+    <div class="scr" id="s-units">
+      <div class="sr">
+        <div class="sc"><div class="sc-lbl">Total Units<div class="sc-ic" style="background:var(--brand-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--brand)"><path d="M7 1.5L1.5 5.5v7h3.5V9.5h4V12.5H12.5v-7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div></div><div class="sc-v">312</div><div class="sc-d neu">Across 5 properties</div></div>
+        <div class="sc"><div class="sc-lbl">Occupied<div class="sc-ic" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--green)"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12.5c0-2.761 2.239-4 5-4s5 1.239 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div></div><div class="sc-v" style="color:var(--green)">299</div><div class="sc-d up"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 8.5V2.5M2 5.5l3.5-3 3.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>96.5% occupied</div></div>
+        <div class="sc"><div class="sc-lbl">Vacant<div class="sc-ic" style="background:var(--amber-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--amber)"><path d="M7 2.5v4.5M7 9.5v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="color:var(--amber)">13</div><div class="sc-d neu">4 under renovation</div></div>
+        <div class="sc"><div class="sc-lbl">Avg. Rent / Unit<div class="sc-ic" style="background:#F0FDF4"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--green)"><path d="M7 1v1.5M7 11.5V13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="7" r="3.5" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="font-size:20px">₦281k</div><div class="sc-d up"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 8.5V2.5M2 5.5l3.5-3 3.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>+₦12k vs last yr</div></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div class="ftabs"><div class="ft on">All Properties</div><div class="ft">Lekki Heights</div><div class="ft">Oniru Estate</div><div class="ft">VI Terrace</div><div class="ft">Ikoyi Annex</div></div>
+        <div style="display:flex;gap:8px"><div class="sbox" style="width:170px"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" style="color:var(--g400);flex-shrink:0"><circle cx="5.5" cy="5.5" r="3.5" stroke="currentColor" stroke-width="1.3"/><path d="M8.5 8.5L11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input type="text" placeholder="Search units…" readonly></div><button class="btn btn-sec">Filter</button></div>
+      </div>
+      <div class="ugrid">
+        <div class="uc"><div class="uc-h"><div><div class="uc-n">Unit 3B</div><div class="uc-p">Lekki Heights</div></div><span class="badge bg">Occupied</span></div><div class="uc-t"><div class="av" style="background:#3B82F6;width:26px;height:26px;font-size:9px">EO</div><div class="uc-tn">Emeka Okafor</div></div><div class="uc-st"><div class="ucs"><div class="ucs-l">Monthly Rent</div><div class="ucs-v">₦280,000</div></div><div class="ucs"><div class="ucs-l">Lease End</div><div class="ucs-v">Aug 2025</div></div><div class="ucs"><div class="ucs-l">Status</div><div class="ucs-v" style="color:var(--green)">Paid</div></div></div></div>
+        <div class="uc"><div class="uc-h"><div><div class="uc-n">Flat 7A</div><div class="uc-p">Oniru Estate</div></div><span class="badge ba">Due Soon</span></div><div class="uc-t"><div class="av" style="background:#8B5CF6;width:26px;height:26px;font-size:9px">NA</div><div class="uc-tn">Ngozi Adeyemi</div></div><div class="uc-st"><div class="ucs"><div class="ucs-l">Monthly Rent</div><div class="ucs-v">₦420,000</div></div><div class="ucs"><div class="ucs-l">Lease End</div><div class="ucs-v">Feb 2026</div></div><div class="ucs"><div class="ucs-l">Status</div><div class="ucs-v" style="color:var(--amber)">Due in 3d</div></div></div></div>
+        <div class="uc"><div class="uc-h"><div><div class="uc-n">Unit 12</div><div class="uc-p">VI Terrace</div></div><span class="badge br">Overdue</span></div><div class="uc-t"><div class="av" style="background:#EF4444;width:26px;height:26px;font-size:9px">BI</div><div class="uc-tn">Babatunde Idowu</div></div><div class="uc-st"><div class="ucs"><div class="ucs-l">Monthly Rent</div><div class="ucs-v">₦650,000</div></div><div class="ucs"><div class="ucs-l">Lease End</div><div class="ucs-v">Nov 2025</div></div><div class="ucs"><div class="ucs-l">Status</div><div class="ucs-v" style="color:var(--red)">14d overdue</div></div></div></div>
+        <div class="uc"><div class="uc-h"><div><div class="uc-n">Studio 2</div><div class="uc-p">Ikoyi Annex</div></div><span class="badge bg">Occupied</span></div><div class="uc-t"><div class="av" style="background:#059669;width:26px;height:26px;font-size:9px">CE</div><div class="uc-tn">Chidinma Eze</div></div><div class="uc-st"><div class="ucs"><div class="ucs-l">Monthly Rent</div><div class="ucs-v">₦195,000</div></div><div class="ucs"><div class="ucs-l">Lease End</div><div class="ucs-v">Jun 2026</div></div><div class="ucs"><div class="ucs-l">Status</div><div class="ucs-v" style="color:var(--green)">Paid</div></div></div></div>
+        <div class="uc"><div class="uc-h"><div><div class="uc-n">Penthouse 1</div><div class="uc-p">Lekki Heights</div></div><span class="badge bgr">Vacating</span></div><div class="uc-t"><div class="av" style="background:#D97706;width:26px;height:26px;font-size:9px">FF</div><div class="uc-tn">Folake Fasanya</div></div><div class="uc-st"><div class="ucs"><div class="ucs-l">Monthly Rent</div><div class="ucs-v">₦900,000</div></div><div class="ucs"><div class="ucs-l">Vacating</div><div class="ucs-v" style="color:var(--red)">Jul 2025</div></div><div class="ucs"><div class="ucs-l">Renewal</div><div class="ucs-v">Not renewed</div></div></div></div>
+        <div class="uc"><div class="uc-h"><div><div class="uc-n">Unit 08</div><div class="uc-p">VI Terrace</div></div><span class="badge bg">Occupied</span></div><div class="uc-t"><div class="av" style="background:#EC4899;width:26px;height:26px;font-size:9px">AT</div><div class="uc-tn">Amaka Taiwo</div></div><div class="uc-st"><div class="ucs"><div class="ucs-l">Monthly Rent</div><div class="ucs-v">₦310,000</div></div><div class="ucs"><div class="ucs-l">Lease End</div><div class="ucs-v">Jan 2026</div></div><div class="ucs"><div class="ucs-l">Status</div><div class="ucs-v" style="color:var(--green)">Paid</div></div></div></div>
+        <div class="uc" style="border:1.5px dashed var(--g300);background:var(--g50);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:140px"><div style="width:36px;height:36px;border-radius:50%;background:var(--g200);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--g400)"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div style="font-size:12px;font-weight:600;color:var(--g400)">Add Vacant Unit</div></div>
+        <div class="uc" style="background:var(--brand-light);border-color:rgba(26,79,186,0.2)"><div class="uc-h"><div><div class="uc-n" style="color:var(--brand)">Block A · 4</div><div class="uc-p" style="color:var(--brand-mid)">Surulere Close</div></div><span class="badge bb">Vacant</span></div><div style="font-size:12px;color:var(--g500);margin-bottom:10px">Last vacated May 12, 2025</div><div class="uc-st"><div class="ucs"><div class="ucs-l">Listed Rent</div><div class="ucs-v">₦240,000</div></div><div class="ucs"><div class="ucs-l">Vacant for</div><div class="ucs-v">18 days</div></div><div class="ucs"><div class="ucs-l">Applications</div><div class="ucs-v" style="color:var(--brand)">3 pending</div></div></div></div>
+        <div class="uc" style="background:var(--amber-light);border-color:rgba(245,158,11,0.25)"><div class="uc-h"><div><div class="uc-n" style="color:#92400E">Unit 2F</div><div class="uc-p" style="color:#B45309">Oniru Estate</div></div><span class="badge ba">Renovation</span></div><div style="font-size:12px;color:var(--g500);margin-bottom:10px">Plumbing overhaul · Est. 14 days</div><div class="uc-st"><div class="ucs"><div class="ucs-l">Started</div><div class="ucs-v">May 20</div></div><div class="ucs"><div class="ucs-l">Est. Done</div><div class="ucs-v">Jun 3</div></div><div class="ucs"><div class="ucs-l">Budget</div><div class="ucs-v">₦180,000</div></div></div></div>
+      </div>
+      <div class="tfoot" style="background:white;border-radius:10px;border:1px solid var(--g200);margin-bottom:14px"><div class="tfi">Showing 1–9 of 312 units</div><div class="pgs"><div class="pg">‹</div><div class="pg on">1</div><div class="pg">2</div><div class="pg">…</div><div class="pg">35</div><div class="pg">›</div></div></div>
+    </div>
+
+    <!-- TENANTS -->
+    <div class="scr" id="s-tenants">
+      <div class="sr">
+        <div class="sc"><div class="sc-lbl">Active Tenants<div class="sc-ic" style="background:var(--brand-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--brand)"><circle cx="5" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M1 12.5c0-2.2 1.8-3.5 4-3.5s4 1.3 4 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M10 9c1.8 0 3 1 3 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div></div><div class="sc-v">299</div><div class="sc-d neu">In 312 units</div></div>
+        <div class="sc"><div class="sc-lbl">Renewing This Qtr<div class="sc-ic" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--green)"><path d="M12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z" stroke="currentColor" stroke-width="1.2"/><path d="M12 3v4h-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="sc-v" style="color:var(--green)">41</div><div class="sc-d up"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 8.5V2.5M2 5.5l3.5-3 3.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>87% renewal rate</div></div>
+        <div class="sc"><div class="sc-lbl">Vacating (60 days)<div class="sc-ic" style="background:var(--amber-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--amber)"><path d="M9 7H2M2 7l3-3M2 7l3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 4.5V3h3v8h-3v-1.5" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div></div><div class="sc-v" style="color:var(--amber)">7</div><div class="sc-d neu">3 already listed</div></div>
+        <div class="sc"><div class="sc-lbl">Overdue on Rent<div class="sc-ic" style="background:var(--red-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--red)"><path d="M7 2.5v4.5M7 9.5v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="color:var(--red)">11</div><div class="sc-d dn"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 2.5v6M9 6l-3.5 3L2 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>₦4.8M outstanding</div></div>
+      </div>
+      <div class="card">
+        <div class="ch"><div style="display:flex;align-items:center;gap:12px"><span class="ct">All Tenants</span><div class="ftabs"><div class="ft on">All</div><div class="ft">Overdue</div><div class="ft">Renewing</div><div class="ft">Vacating</div></div></div><div style="display:flex;gap:8px"><div class="sbox" style="width:190px"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" style="color:var(--g400);flex-shrink:0"><circle cx="5.5" cy="5.5" r="3.5" stroke="currentColor" stroke-width="1.3"/><path d="M8.5 8.5L11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input type="text" placeholder="Search by name…" readonly></div><button class="btn btn-sec">Export</button></div></div>
+        <table><thead><tr><th>Tenant</th><th>Unit / Property</th><th>Move-in</th><th>Lease End</th><th>Monthly Rent</th><th>Rent Status</th><th>Requests</th><th></th></tr></thead><tbody>
+          <tr><td><div class="tc"><div class="av" style="background:#3B82F6">EO</div><div><div class="tn">Emeka Okafor</div><div class="ts">emeka.o@gmail.com · +234 803 456 1234</div></div></div></td><td><div style="font-size:12px;font-weight:500">3B · Lekki Heights</div></td><td>Aug 2022</td><td>Aug 2025</td><td><span class="amt">₦280,000</span></td><td><span class="badge bg"><span class="dot" style="background:var(--green)"></span>Paid</span></td><td style="font-size:12px;color:var(--g500)">0 open</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div class="tc"><div class="av" style="background:#8B5CF6">NA</div><div><div class="tn">Ngozi Adeyemi</div><div class="ts">n.adeyemi@icloud.com · +234 802 789 4567</div></div></div></td><td><div style="font-size:12px;font-weight:500">7A · Oniru Estate</div></td><td>Feb 2024</td><td>Feb 2026</td><td><span class="amt">₦420,000</span></td><td><span class="badge ba"><span class="dot" style="background:var(--amber)"></span>Due 3 days</span></td><td style="font-size:12px;color:var(--amber)">1 open</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div class="tc"><div class="av" style="background:#EF4444">BI</div><div><div class="tn">Babatunde Idowu</div><div class="ts">b.idowu@yahoo.com · +234 806 123 9988</div></div></div></td><td><div style="font-size:12px;font-weight:500">Unit 12 · VI Terrace</div></td><td>Nov 2022</td><td>Nov 2025</td><td><span class="amt">₦650,000</span></td><td><span class="badge br"><span class="dot" style="background:var(--red)"></span>Overdue 14d</span></td><td style="font-size:12px;color:var(--red)">2 open</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div class="tc"><div class="av" style="background:#059669">CE</div><div><div class="tn">Chidinma Eze</div><div class="ts">chidinma@chidinma.ng · +234 814 555 0012</div></div></div></td><td><div style="font-size:12px;font-weight:500">Studio 2 · Ikoyi Annex</div></td><td>Jun 2023</td><td>Jun 2026</td><td><span class="amt">₦195,000</span></td><td><span class="badge bg"><span class="dot" style="background:var(--green)"></span>Paid</span></td><td style="font-size:12px;color:var(--g500)">0 open</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div class="tc"><div class="av" style="background:#0EA5E9">AO</div><div><div class="tn">Amara Obi</div><div class="ts">amara.obi@gmail.com · +234 809 234 7890</div></div></div></td><td><div style="font-size:12px;font-weight:500">Unit 5 · Surulere Close</div></td><td>Mar 2024</td><td>Mar 2026</td><td><span class="amt">₦165,000</span></td><td><span class="badge bb"><span class="dot" style="background:var(--brand)"></span>Processing</span></td><td style="font-size:12px;color:var(--g500)">0 open</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div class="tc"><div class="av" style="background:#D97706">FF</div><div><div class="tn">Folake Fasanya</div><div class="ts">folake.f@ymail.com · +234 802 998 1123</div></div></div></td><td><div style="font-size:12px;font-weight:500">Penthouse 1 · Lekki</div></td><td>Jul 2022</td><td><span style="color:var(--red);font-weight:600">Vacating Jul '25</span></td><td><span class="amt">₦900,000</span></td><td><span class="badge bgr">Not renewed</span></td><td style="font-size:12px;color:var(--g500)">0 open</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div class="tc"><div class="av" style="background:#EC4899">AT</div><div><div class="tn">Amaka Taiwo</div><div class="ts">amaka.taiwo@gmail.com · +234 703 456 8812</div></div></div></td><td><div style="font-size:12px;font-weight:500">Unit 08 · VI Terrace</div></td><td>Jan 2024</td><td>Jan 2026</td><td><span class="amt">₦310,000</span></td><td><span class="badge bg"><span class="dot" style="background:var(--green)"></span>Paid</span></td><td style="font-size:12px;color:var(--amber)">1 urgent</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div class="tc"><div class="av" style="background:#7C3AED">OK</div><div><div class="tn">Olumide Kehinde</div><div class="ts">o.kehinde@outlook.com · +234 815 007 3341</div></div></div></td><td><div style="font-size:12px;font-weight:500">3A · Lekki Heights</div></td><td>Sep 2021</td><td>Sep 2025</td><td><span class="amt">₦320,000</span></td><td><span class="badge br"><span class="dot" style="background:var(--red)"></span>Overdue 7d</span></td><td style="font-size:12px;color:var(--g500)">0 open</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+        </tbody></table>
+        <div class="tfoot"><div class="tfi">Showing 1–8 of 299 tenants</div><div class="pgs"><div class="pg">‹</div><div class="pg on">1</div><div class="pg">2</div><div class="pg">3</div><div class="pg">…</div><div class="pg">38</div><div class="pg">›</div></div></div>
+      </div>
+    </div>
+
+    <!-- MAINTENANCE -->
+    <div class="scr" id="s-maintenance">
+      <div class="sr">
+        <div class="sc"><div class="sc-lbl">Open Requests<div class="sc-ic" style="background:var(--amber-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--amber)"><path d="M7 2.5v4.5M7 9.5v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="color:var(--amber)">8</div><div class="sc-d dn"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 2.5v6M9 6l-3.5 3L2 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>3 past SLA</div></div>
+        <div class="sc"><div class="sc-lbl">Urgent<div class="sc-ic" style="background:var(--red-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--red)"><path d="M7 2.5v4.5M7 9.5v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="color:var(--red)">2</div><div class="sc-d neu">Needs same-day fix</div></div>
+        <div class="sc"><div class="sc-lbl">Resolved This Month<div class="sc-ic" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--green)"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="sc-v" style="color:var(--green)">23</div><div class="sc-d up"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 8.5V2.5M2 5.5l3.5-3 3.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Avg 1.8 days to close</div></div>
+        <div class="sc"><div class="sc-lbl">Spend This Month<div class="sc-ic" style="background:#FFF7ED"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:#EA580C"><rect x="1.5" y="4" width="11" height="7" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 4V3a2.5 2.5 0 0 1 5 0v1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div></div><div class="sc-v" style="font-size:20px">₦1.14M</div><div class="sc-d neu">vs ₦980k budget</div></div>
+      </div>
+      <div class="card">
+        <div class="ch"><div style="display:flex;align-items:center;gap:12px"><span class="ct">Maintenance Requests</span><div class="ftabs"><div class="ft on">All</div><div class="ft">Urgent</div><div class="ft">Scheduled</div><div class="ft">Resolved</div></div></div><button class="btn btn-pri" style="padding:6px 12px;font-size:12px"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>New Request</button></div>
+        <table><thead><tr><th>Issue</th><th>Unit / Property</th><th>Submitted By</th><th>Date</th><th>Priority</th><th>Status</th><th>Assigned To</th><th></th></tr></thead><tbody>
+          <tr><td><div style="font-size:12.5px;font-weight:600;color:var(--g800)">Water heater failure</div><div class="ts">Tenant reported no hot water</div></td><td><div style="font-size:12px;font-weight:500">Unit 08</div><div class="ts">VI Terrace</div></td><td><div class="tc" style="gap:6px"><div class="av avsm" style="background:#EC4899">AT</div><span style="font-size:12px">Amaka Taiwo</span></div></td><td>Today, 9:14 AM</td><td><span class="badge br">Urgent</span></td><td><span class="badge ba">In progress</span></td><td style="font-size:12px;color:var(--g600)">Chukwu Plumbing</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div style="font-size:12.5px;font-weight:600;color:var(--g800)">Generator fault</div><div class="ts">Backup gen not starting</div></td><td><div style="font-size:12px;font-weight:500">Block C</div><div class="ts">Oniru Estate</div></td><td><div class="tc" style="gap:6px"><div class="av avsm" style="background:#0EA5E9">FA</div><span style="font-size:12px">Facility Admin</span></div></td><td>Today, 7:30 AM</td><td><span class="badge br">Urgent</span></td><td><span class="badge bb">Logged</span></td><td style="font-size:12px;color:var(--g400)">Unassigned</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div style="font-size:12.5px;font-weight:600;color:var(--g800)">Intercom not working</div><div class="ts">Block C gate intercom broken</div></td><td><div style="font-size:12px;font-weight:500">Block C</div><div class="ts">Oniru Estate</div></td><td><div class="tc" style="gap:6px"><div class="av avsm" style="background:#7C3AED">SK</div><span style="font-size:12px">Seun Kehinde</span></div></td><td>Yesterday</td><td><span class="badge ba">Medium</span></td><td><span class="badge ba">Scheduled</span></td><td style="font-size:12px;color:var(--g600)">TechSafe NG</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div style="font-size:12.5px;font-weight:600;color:var(--g800)">Replace ceiling light</div><div class="ts">Kitchen bulb holder broken</div></td><td><div style="font-size:12px;font-weight:500">Unit 3B</div><div class="ts">Lekki Heights</div></td><td><div class="tc" style="gap:6px"><div class="av avsm" style="background:#3B82F6">EO</div><span style="font-size:12px">Emeka Okafor</span></div></td><td>2 days ago</td><td><span class="badge bgr">Low</span></td><td><span class="badge bb">Scheduled</span></td><td style="font-size:12px;color:var(--g600)">In-house team</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr><td><div style="font-size:12.5px;font-weight:600;color:var(--g800)">Leaking tap — bathroom</div><div class="ts">Master bath tap dripping</div></td><td><div style="font-size:12px;font-weight:500">Flat 7A</div><div class="ts">Oniru Estate</div></td><td><div class="tc" style="gap:6px"><div class="av avsm" style="background:#8B5CF6">NA</div><span style="font-size:12px">Ngozi Adeyemi</span></div></td><td>3 days ago</td><td><span class="badge ba">Medium</span></td><td><span class="badge ba">In progress</span></td><td style="font-size:12px;color:var(--g600)">Chukwu Plumbing</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          <tr style="opacity:0.55"><td><div style="font-size:12.5px;font-weight:600;color:var(--g800)">Repaint corridor walls</div><div class="ts">Ground floor corridor</div></td><td><div style="font-size:12px;font-weight:500">Ground Floor</div><div class="ts">Ikoyi Annex</div></td><td><div class="tc" style="gap:6px"><div class="av avsm" style="background:#059669">PM</div><span style="font-size:12px">Property Mgr.</span></div></td><td>May 22</td><td><span class="badge bgr">Low</span></td><td><span class="badge bg">Resolved</span></td><td style="font-size:12px;color:var(--g600)">PaintPro Lagos</td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+        </tbody></table>
+        <div class="tfoot"><div class="tfi">Showing 6 of 31 requests this month</div><div class="pgs"><div class="pg">‹</div><div class="pg on">1</div><div class="pg">2</div><div class="pg">3</div><div class="pg">›</div></div></div>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="scr" id="s-payments">
+      <div class="sr" style="grid-template-columns:repeat(3,1fr)">
+        <div class="sc"><div class="sc-lbl">Expected (May)<div class="sc-ic" style="background:var(--g100)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--g500)"><rect x="1.5" y="3" width="11" height="8.5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 6h11" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="font-size:22px">₦88.6M</div><div class="sc-d neu">From 299 occupied units</div></div>
+        <div class="sc"><div class="sc-lbl" style="color:var(--green)">Collected<div class="sc-ic" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--green)"><path d="M2.5 7.5l3 3 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="sc-v" style="font-size:22px;color:var(--green)">₦84.2M</div><div class="sc-d up"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 8.5V2.5M2 5.5l3.5-3 3.5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>95.0% collection rate</div></div>
+        <div class="sc"><div class="sc-lbl" style="color:var(--red)">Outstanding<div class="sc-ic" style="background:var(--red-light)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--red)"><path d="M7 2.5v4.5M7 9.5v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/></svg></div></div><div class="sc-v" style="font-size:22px;color:var(--red)">₦4.4M</div><div class="sc-d dn"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 2.5v6M9 6l-3.5 3L2 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>11 tenants overdue</div></div>
+      </div>
+      <div class="g21">
+        <div class="card">
+          <div class="ch"><div style="display:flex;align-items:center;gap:12px"><span class="ct">Payment Transactions</span><div class="ftabs"><div class="ft on">All</div><div class="ft">Paid</div><div class="ft">Pending</div><div class="ft">Failed</div></div></div><button class="btn btn-sec" style="font-size:11.5px;padding:6px 10px">Filter by date</button></div>
+          <table><thead><tr><th>Tenant</th><th>Unit</th><th>Amount</th><th>Date</th><th>Method</th><th>Status</th><th></th></tr></thead><tbody>
+            <tr><td><div class="tc"><div class="av avsm" style="background:#059669">CE</div><span style="font-size:12.5px;font-weight:500">Chidinma Eze</span></div></td><td>Studio 2 · Ikoyi</td><td><span class="amt">₦195,000</span></td><td>May 28</td><td style="font-size:11.5px;color:var(--g500)">Bank Transfer</td><td><span class="badge bg"><span class="dot" style="background:var(--green)"></span>Confirmed</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av avsm" style="background:#3B82F6">EO</div><span style="font-size:12.5px;font-weight:500">Emeka Okafor</span></div></td><td>Unit 3B · Lekki</td><td><span class="amt">₦280,000</span></td><td>May 27</td><td style="font-size:11.5px;color:var(--g500)">Bank Transfer</td><td><span class="badge bg"><span class="dot" style="background:var(--green)"></span>Confirmed</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av avsm" style="background:#0EA5E9">AO</div><span style="font-size:12.5px;font-weight:500">Amara Obi</span></div></td><td>Unit 5 · Surulere</td><td><span class="amt">₦165,000</span></td><td>May 26</td><td style="font-size:11.5px;color:var(--g500)">Card</td><td><span class="badge bb"><span class="dot" style="background:var(--brand)"></span>Processing</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av avsm" style="background:#EC4899">AT</div><span style="font-size:12.5px;font-weight:500">Amaka Taiwo</span></div></td><td>Unit 08 · VI</td><td><span class="amt">₦310,000</span></td><td>May 25</td><td style="font-size:11.5px;color:var(--g500)">Bank Transfer</td><td><span class="badge bg"><span class="dot" style="background:var(--green)"></span>Confirmed</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av avsm" style="background:#EF4444">BI</div><span style="font-size:12.5px;font-weight:500">Babatunde Idowu</span></div></td><td>Unit 12 · VI</td><td><span class="amt">₦650,000</span></td><td>May 12</td><td style="font-size:11.5px;color:var(--g500)">Bank Transfer</td><td><span class="badge br"><span class="dot" style="background:var(--red)"></span>Failed</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+            <tr><td><div class="tc"><div class="av avsm" style="background:#7C3AED">OK</div><span style="font-size:12.5px;font-weight:500">Olumide Kehinde</span></div></td><td>3A · Lekki</td><td><span class="amt">₦320,000</span></td><td>May 8</td><td style="font-size:11.5px;color:var(--g500)">Bank Transfer</td><td><span class="badge ba"><span class="dot" style="background:var(--amber)"></span>Unconfirmed</span></td><td style="color:var(--g400);font-size:18px;line-height:1">···</td></tr>
+          </tbody></table>
+          <div class="tfoot"><div class="tfi">Showing 1–6 of 281 transactions · May 2025</div><div class="pgs"><div class="pg">‹</div><div class="pg on">1</div><div class="pg">2</div><div class="pg">…</div><div class="pg">47</div><div class="pg">›</div></div></div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="ch"><span class="ct">Collection Rate</span><span style="font-size:11.5px;color:var(--g500)">May 2025</span></div>
+            <div style="padding:16px 18px">
+              <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:14px"><span style="font-family:var(--display);font-size:36px;font-weight:800;color:var(--green);letter-spacing:-1px">95.0%</span><span style="font-size:12px;color:var(--g400)">of expected</span></div>
+              <div style="height:10px;background:var(--g100);border-radius:6px;overflow:hidden;margin-bottom:10px"><div style="height:100%;width:95%;background:linear-gradient(90deg,var(--green),#34D399);border-radius:6px"></div></div>
+              <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--g500)"><span>₦84.2M collected</span><span>₦4.4M remaining</span></div>
+              <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--g100);display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div><div style="font-size:10.5px;color:var(--g400);margin-bottom:3px">On time</div><div style="font-size:15px;font-weight:700;color:var(--g800);font-family:var(--display)">83%</div></div>
+                <div><div style="font-size:10.5px;color:var(--g400);margin-bottom:3px">Late (paid)</div><div style="font-size:15px;font-weight:700;color:var(--amber);font-family:var(--display)">12%</div></div>
+                <div><div style="font-size:10.5px;color:var(--g400);margin-bottom:3px">Outstanding</div><div style="font-size:15px;font-weight:700;color:var(--red);font-family:var(--display)">5%</div></div>
+                <div><div style="font-size:10.5px;color:var(--g400);margin-bottom:3px">Disputed</div><div style="font-size:15px;font-weight:700;color:var(--g500);font-family:var(--display)">0.3%</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct">6-Month Trend</span></div>
+            <div style="padding:14px 18px">
+              <div class="rbars"><div class="rbc"><div class="rbb" style="height:52%"></div><div class="rbl">Dec</div></div><div class="rbc"><div class="rbb" style="height:61%"></div><div class="rbl">Jan</div></div><div class="rbc"><div class="rbb" style="height:58%"></div><div class="rbl">Feb</div></div><div class="rbc"><div class="rbb" style="height:71%"></div><div class="rbl">Mar</div></div><div class="rbc"><div class="rbb" style="height:68%"></div><div class="rbl">Apr</div></div><div class="rbc"><div class="rbb on" style="height:95%"></div><div class="rbl" style="color:var(--brand);font-weight:600">May</div></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--g100)"><span style="font-size:11.5px;color:var(--g500)">May collection</span><span style="font-family:var(--display);font-size:15px;font-weight:700;color:var(--g900)">₦84.2M</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const cfg = {
+  dashboard:   { title:'Dashboard',   cta:'Add Unit',       nav:'sn-dashboard' },
+  units:       { title:'Units',        cta:'Add Unit',       nav:'sn-units' },
+  tenants:     { title:'Tenants',      cta:'Add Tenant',     nav:'sn-tenants' },
+  maintenance: { title:'Maintenance',  cta:'New Request',    nav:'sn-maintenance' },
+  payments:    { title:'Payments',     cta:'Record Payment', nav:'sn-payments' }
+};
+function go(id) {
+  document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
+  document.getElementById('s-' + id).classList.add('on');
+  document.querySelectorAll('.ni[id^="sn-"]').forEach(n => n.classList.remove('on'));
+  document.getElementById(cfg[id].nav).classList.add('on');
+  document.getElementById('tt').textContent = cfg[id].title;
+  document.getElementById('cta').textContent = cfg[id].cta;
+  document.querySelector('.content').scrollTop = 0;
+}
+</script>
+</body>
+</html>

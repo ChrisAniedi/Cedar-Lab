@@ -1,4 +1,17 @@
+import { readdirSync, readFileSync } from 'fs';
+import { join } from 'path';
 import casesJson from './cases.json';
+
+// Read a prototype HTML file from /public at build time so it can be rendered
+// inline via <iframe srcDoc> (no extra request, and no browser-history pollution).
+function readPrototype(rel?: string): string | undefined {
+  if (!rel) return undefined;
+  try {
+    return readFileSync(join(process.cwd(), 'public', rel.replace(/^\//, '')), 'utf8');
+  } catch {
+    return undefined;
+  }
+}
 
 export interface BuildItem { name: string; desc: string; icon: string }
 export interface ProcessStep { title: string; desc: string }
@@ -13,8 +26,26 @@ export interface Market { flag: string; name: string }
 export interface CaseStudy {
   tag: string; industry: string; title: string; timeline: string; big: string; rl: string;
   tech: string[]; mockKind: 'kv' | 'bars'; light: boolean; badge: string; mockTitle: string;
-  a?: string; b?: string; al?: string; bl?: string;
+  a?: string; b?: string; al?: string; bl?: string; prototype?: string; blurb?: string; services?: string;
+  fullTitle?: string; goal?: string; highlights?: [string, string][];
   metrics: [string, string][]; overview: string; challenge: string; built: string[]; quote: string; quoteBy: string;
+}
+
+function slugify(s: string): string {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+// List screenshot files dropped into /public/work/<slug>/ (sorted by filename,
+// so 01-*, 02-* control order; the first is used as the detail-page hero image).
+function listImages(slug: string): string[] {
+  try {
+    return readdirSync(join(process.cwd(), 'public', 'work', slug))
+      .filter((f) => /\.(png|jpe?g|webp|avif|gif)$/i.test(f))
+      .sort()
+      .map((f) => `/work/${slug}/${f}`);
+  } catch {
+    return [];
+  }
 }
 
 export const CASES = casesJson as CaseStudy[];
@@ -28,8 +59,16 @@ function mockHtml(c: CaseStudy): string {
   return `<div class="ms ${cls}"><div class="mhd"><span class="t">${c.mockTitle}</span><span class="b">${c.badge}</span></div>${body}</div>`;
 }
 
-// Projects = cases enriched with rendered mock markup + a stable id (index-based).
-export const PROJECTS = CASES.map((c, i) => ({ ...c, id: i, mock: mockHtml(c) }));
+// Projects = cases enriched with rendered mock markup, a stable id, and a url slug.
+export const PROJECTS = CASES.map((c, i) => {
+  const slug = slugify(c.title);
+  return { ...c, id: i, slug, mock: mockHtml(c), prototypeHtml: readPrototype(c.prototype), images: listImages(slug) };
+});
+
+export type Project = (typeof PROJECTS)[number];
+
+export const getProject = (slug: string): Project | undefined =>
+  PROJECTS.find((p) => p.slug === slug);
 
 export const BUILDS: BuildItem[] = [
   { name: 'MVP Development', desc: 'Validate fast with a lean, real product.', icon: 'mvp' },

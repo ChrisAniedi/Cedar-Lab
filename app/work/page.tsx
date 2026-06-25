@@ -1,6 +1,6 @@
 import FinalCta from '@/components/FinalCta';
+import ProjectCard from '@/components/ProjectCard';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
-import WorkGrid from '@/components/WorkGrid';
 import { PROJECTS, TESTIMONIALS, WORK_STATS } from '@/lib/site-data';
 import type { Metadata } from 'next';
 
@@ -26,7 +26,7 @@ export default function Work() {
       <section className="sec" style={{ paddingTop: 20 }}><div className="wrap">
         <div className="sec-head reveal"><span className="kicker">Case Studies</span><h2 className="title">Outcomes, not just outputs.</h2>
           <p className="lead">Tap any project to read the full case study.</p></div>
-        <WorkGrid projects={PROJECTS} />
+        <div className="proj-grid">{PROJECTS.map((p, i) => <ProjectCard key={p.id} p={p} className={`reveal d${i % 3}`} />)}</div>
       </div></section>
 
       <section className="sec"><div className="wrap">

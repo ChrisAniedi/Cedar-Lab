@@ -1,50 +1,560 @@
 [
- {"tag":"PropTech","industry":"Real Estate","title":"Property Management Platform","timeline":"9 Weeks","big":"60%","rl":"reduction in manual operations across the portfolio","tech":["React","Node","PostgreSQL","AWS"],"mockKind":"kv","light":false,"a":"312","b":"96%","al":"Units","bl":"Occupancy","badge":"+ New","mockTitle":"Property Manager",
-  "metrics":[["60%","less manual work"],["312","units managed"],["96%","occupancy visibility"]],
-  "overview":"A regional property manager was running a 300+ unit portfolio on spreadsheets and disconnected tools.",
-  "challenge":"Leasing, maintenance, and rent tracking lived in separate spreadsheets and inboxes. Nothing was real-time, and the team lost hours every week reconciling data by hand.",
-  "built":["A unified dashboard for units, tenants, and leases","Automated rent reminders and payment tracking","A maintenance request portal for tenants","Real-time occupancy and revenue reporting"],
-  "quote":"We replaced four tools and a mountain of spreadsheets with one platform. Our team got their week back.","quoteBy":"Operations Lead, regional property group"},
- {"tag":"AI","industry":"SaaS · Support","title":"AI Customer Support Agent","timeline":"5 Weeks","big":"80%","rl":"faster response times with an AI-first support flow","tech":["Python","LLM","RAG","Vector DB"],"mockKind":"kv","light":true,"a":"1,840","b":"4.8","al":"Resolved","bl":"CSAT","badge":"● Live","mockTitle":"Support Copilot",
-  "metrics":[["80%","faster responses"],["1,840","tickets resolved"],["4.8","CSAT score"]],
-  "overview":"A growing SaaS company's support queue was outpacing its small team.",
-  "challenge":"Response times climbed as ticket volume grew, and hiring couldn't keep pace. Customers waited hours for answers already buried in the docs.",
-  "built":["An AI agent trained on their docs and past tickets (RAG)","Automatic draft replies for agents to approve","Smart triage and escalation routing","A feedback loop that improves answers over time"],
-  "quote":"It handles the repetitive 80% instantly, so our humans focus on the cases that actually need them.","quoteBy":"Head of Support, SaaS scale-up"},
- {"tag":"Logistics","industry":"Logistics","title":"Logistics Operations Dashboard","timeline":"8 Weeks","big":"45%","rl":"increase in operational efficiency company-wide","tech":["Next.js","Go","Redis","WebSockets"],"mockKind":"bars","light":false,"badge":"Realtime","mockTitle":"Ops Control",
-  "metrics":[["45%","more efficient"],["Realtime","fleet visibility"],["1","source of truth"]],
-  "overview":"A logistics operator needed live visibility across a fragmented operation.",
-  "challenge":"Dispatch, fleet status, and delivery data were scattered across systems, making it impossible to spot bottlenecks until it was too late.",
-  "built":["A real-time operations control dashboard","Live fleet and shipment tracking","Automated exception alerts","Performance analytics by route and driver"],
-  "quote":"For the first time we can see the whole operation at a glance — and act before small issues become big ones.","quoteBy":"COO, logistics operator"},
- {"tag":"HealthTech","industry":"Healthcare","title":"Healthcare Booking Platform","timeline":"7 Weeks","big":"3×","rl":"appointment growth within the first quarter","tech":["React Native","Node","Stripe","Twilio"],"mockKind":"kv","light":true,"a":"64","b":"-30%","al":"Today","bl":"No-shows","badge":"+ Booking","mockTitle":"CareBook",
-  "metrics":[["3×","appointment growth"],["-30%","no-shows"],["64","daily bookings"]],
-  "overview":"A multi-location clinic relied on phone bookings and a clunky calendar.",
-  "challenge":"Patients struggled to book outside office hours, no-shows were high, and front-desk staff spent the day on the phone.",
-  "built":["Online and mobile self-booking","Automated SMS and email reminders","Multi-practitioner scheduling","A simple admin view for the front desk"],
-  "quote":"Bookings tripled and no-shows dropped — patients love booking on their phone at midnight.","quoteBy":"Practice Manager, multi-site clinic"},
- {"tag":"FinTech","industry":"SaaS · Analytics","title":"SaaS Analytics Platform","timeline":"10 Weeks","big":"2.5×","rl":"faster customer onboarding after the rebuild","tech":["Next.js","Python","BigQuery","dbt"],"mockKind":"bars","light":false,"badge":"Live","mockTitle":"Insight Analytics",
-  "metrics":[["2.5×","faster onboarding"],["Live","dashboards"],["↑","retention"]],
-  "overview":"A fintech product's legacy analytics were slow and hard to onboard customers into.",
-  "challenge":"New customers took days to get value from clunky, slow reports, hurting activation and retention.",
-  "built":["A rebuilt, fast analytics dashboard","Self-serve onboarding flows","Customizable reports and exports","A scalable data pipeline"],
-  "quote":"Onboarding that took days now takes hours. Activation went up almost immediately.","quoteBy":"Product Lead, fintech platform"},
- {"tag":"Local Services","industry":"Marketplace","title":"Marketplace for Tradespeople","timeline":"11 Weeks","big":"10k+","rl":"bookings processed in the first 90 days","tech":["React","Node","Stripe Connect","PostgreSQL"],"mockKind":"kv","light":true,"a":"10k+","b":"4.7","al":"Bookings","bl":"Rating","badge":"+ 1.2k","mockTitle":"TradeMatch",
-  "metrics":[["10k+","bookings / 90 days"],["4.7","avg rating"],["2-sided","marketplace"]],
-  "overview":"A startup wanted to connect homeowners with vetted local tradespeople.",
-  "challenge":"They needed a trusted two-sided marketplace — discovery, booking, payments, and reviews — launched fast enough to capture demand.",
-  "built":["Provider profiles, search, and matching","In-app booking and scheduling","Secure payments and payouts","Ratings and reviews for trust"],
-  "quote":"We hit ten thousand bookings in our first quarter — the platform scaled with us from day one.","quoteBy":"Founder, local services marketplace"},
- {"tag":"SMB","industry":"Internal Tools","title":"Internal Operations CRM","timeline":"6 Weeks","big":"12→1","rl":"tools replaced by one unified internal system","tech":["Internal tooling","Node","PostgreSQL","REST APIs"],"mockKind":"kv","light":false,"a":"12→1","b":"98%","al":"Tools","bl":"Adoption","badge":"Unified","mockTitle":"OneDesk",
-  "metrics":[["12→1","tools consolidated"],["98%","team adoption"],["Custom","workflow fit"]],
-  "overview":"An SMB ran its entire operation across a dozen disconnected apps.",
-  "challenge":"Data was duplicated across twelve tools, nothing synced, and onboarding new staff was painful.",
-  "built":["A custom internal CRM and ops hub","Unified customer and pipeline data","Role-based access and dashboards","Integrations with their existing stack"],
-  "quote":"One system replaced twelve. Everyone finally works from the same source of truth.","quoteBy":"Operations Director, SMB"},
- {"tag":"Enterprise","industry":"Automation","title":"AI Workflow Automation","timeline":"9 Weeks","big":"1,000+","rl":"hours saved every month through automation","tech":["Python","LLM","Workflow APIs","Cloud Functions"],"mockKind":"bars","light":false,"badge":"Automated","mockTitle":"AutoFlow",
-  "metrics":[["1,000+","hours saved / mo"],["↓","manual errors"],["24/7","automated runs"]],
-  "overview":"An enterprise team spent thousands of hours a month on repetitive manual processes.",
-  "challenge":"Critical workflows depended on manual data entry and copy-paste between systems — slow, error-prone, and impossible to scale.",
-  "built":["AI-assisted workflow automations","Automated data sync across systems","Exception handling with human-in-the-loop","Monitoring and audit logging"],
-  "quote":"We gave a thousand hours a month back to the team — and cut errors at the same time.","quoteBy":"VP Operations, enterprise"}
+  {
+    "tag": "AI",
+    "industry": "HR Tech · Recruiting",
+    "title": "Talently",
+    "timeline": "11 Weeks",
+    "big": "18d",
+    "rl": "average time-to-hire, cut from over a month",
+    "tech": [
+      "Next.js",
+      "Python",
+      "OpenAI",
+      "PostgreSQL"
+    ],
+    "mockKind": "kv",
+    "light": false,
+    "a": "1,842",
+    "al": "Applications",
+    "b": "87%",
+    "bl": "Acceptance",
+    "badge": "+ New",
+    "mockTitle": "Talently",
+    "metrics": [
+      [
+        "1,842",
+        "applications screened / mo"
+      ],
+      [
+        "18d",
+        "avg. time to hire"
+      ],
+      [
+        "87%",
+        "offer acceptance"
+      ]
+    ],
+    "overview": "Talently is an AI recruiting platform for a fast-scaling company hiring across engineering, design and data. It screens, scores and ranks every applicant by compatibility, so the talent team spends time on people, not spreadsheets.",
+    "challenge": "With 1,800+ applications a month across 24 open roles, recruiters were buried in manual CV screening. Strong candidates went cold, the pipeline had no real-time visibility, and time-to-hire stretched past a month.",
+    "built": [
+      "AI candidate matching that scores and ranks every applicant by role compatibility",
+      "A live hiring pipeline with stage-by-stage funnel and conversion analytics",
+      "Interview scheduling with panels, reminders and a weekly calendar view",
+      "A searchable talent pool plus offers tracking and recruiting dashboards"
+    ],
+    "quote": "Talently surfaces our best-fit candidates the moment they apply. We cut time-to-hire almost in half and stopped losing great people to slow screening.",
+    "quoteBy": "Head of Talent, scaling tech company",
+    "prototype": "/prototypes/talently.html",
+    "blurb": "AI recruiting platform that screens and ranks every applicant.",
+    "services": "AI Product, Design, Full-stack Development",
+    "goal": "To design an AI hiring platform that feels effortless to use, replaces manual CV screening with intelligent candidate matching, and gives the talent team clear visibility into every stage of the pipeline.",
+    "highlights": [
+      [
+        "40+",
+        "Screens & states designed"
+      ],
+      [
+        "80+",
+        "Reusable UI components"
+      ],
+      [
+        "35+",
+        "API endpoints"
+      ]
+    ]
+  },
+  {
+    "tag": "PropTech",
+    "industry": "Real Estate",
+    "title": "Hovra",
+    "timeline": "9 Weeks",
+    "big": "95%",
+    "rl": "rent collection rate across a 300+ unit portfolio",
+    "tech": [
+      "React",
+      "Node",
+      "PostgreSQL",
+      "AWS"
+    ],
+    "mockKind": "kv",
+    "light": false,
+    "a": "312",
+    "b": "96%",
+    "al": "Units",
+    "bl": "Occupancy",
+    "badge": "+ New",
+    "mockTitle": "Hovra",
+    "metrics": [
+      [
+        "312",
+        "units managed"
+      ],
+      [
+        "96%",
+        "occupancy rate"
+      ],
+      [
+        "95%",
+        "rent collection rate"
+      ]
+    ],
+    "overview": "Hovra is a property management platform for Adeyemi Realty Group, a Lagos-based operator running a 312-unit portfolio across five properties — Lekki Heights, Oniru Estate, VI Terrace, Ikoyi Annex and Surulere Close.",
+    "challenge": "Leasing, maintenance, and rent tracking lived in separate spreadsheets and inboxes. Nothing was real-time, and the team lost hours every week reconciling data by hand and chasing overdue rent.",
+    "built": [
+      "A unified dashboard for units, tenants, leases and occupancy",
+      "Rent tracking with payment status, reminders and a collection-rate view",
+      "A maintenance request queue with priority, assignment and SLA tracking",
+      "Real-time occupancy and monthly revenue reporting by property"
+    ],
+    "quote": "We replaced four tools and a mountain of spreadsheets with one platform. Our team got their week back.",
+    "quoteBy": "Operations Lead, Adeyemi Realty Group",
+    "prototype": "/prototypes/hovra.html",
+    "blurb": "Property management platform for a 300+ unit portfolio.",
+    "services": "Product Design, Full-stack Development",
+    "goal": "To replace spreadsheets and disconnected tools with one platform that makes managing units, tenants, rent and maintenance effortless — with real-time visibility across the whole portfolio.",
+    "highlights": [
+      [
+        "45+",
+        "Screens designed"
+      ],
+      [
+        "70+",
+        "Reusable UI components"
+      ],
+      [
+        "40+",
+        "API endpoints"
+      ]
+    ],
+    "fullTitle": "Hovra Properties"
+  },
+  {
+    "tag": "AI",
+    "industry": "SaaS · Support",
+    "title": "AI Customer Support Agent",
+    "timeline": "5 Weeks",
+    "big": "80%",
+    "rl": "faster response times with an AI-first support flow",
+    "tech": [
+      "Python",
+      "LLM",
+      "RAG",
+      "Vector DB"
+    ],
+    "mockKind": "kv",
+    "light": true,
+    "a": "1,840",
+    "b": "4.8",
+    "al": "Resolved",
+    "bl": "CSAT",
+    "badge": "● Live",
+    "mockTitle": "Support Copilot",
+    "metrics": [
+      [
+        "80%",
+        "faster responses"
+      ],
+      [
+        "1,840",
+        "tickets resolved"
+      ],
+      [
+        "4.8",
+        "CSAT score"
+      ]
+    ],
+    "overview": "A growing SaaS company's support queue was outpacing its small team.",
+    "challenge": "Response times climbed as ticket volume grew, and hiring couldn't keep pace. Customers waited hours for answers already buried in the docs.",
+    "built": [
+      "An AI agent trained on their docs and past tickets (RAG)",
+      "Automatic draft replies for agents to approve",
+      "Smart triage and escalation routing",
+      "A feedback loop that improves answers over time"
+    ],
+    "quote": "It handles the repetitive 80% instantly, so our humans focus on the cases that actually need them.",
+    "quoteBy": "Head of Support, SaaS scale-up",
+    "blurb": "Autonomous agent that resolves support tickets end-to-end.",
+    "services": "AI Product, Integration, Development",
+    "goal": "To build an autonomous support agent that resolves common tickets end-to-end, escalates the right cases to humans, and gives the team full visibility into every conversation.",
+    "highlights": [
+      [
+        "25+",
+        "Conversation flows"
+      ],
+      [
+        "50+",
+        "UI components"
+      ],
+      [
+        "30+",
+        "API & tool integrations"
+      ]
+    ]
+  },
+  {
+    "tag": "Logistics",
+    "industry": "Logistics",
+    "title": "Logistics Operations Dashboard",
+    "timeline": "8 Weeks",
+    "big": "45%",
+    "rl": "increase in operational efficiency company-wide",
+    "tech": [
+      "Next.js",
+      "Go",
+      "Redis",
+      "WebSockets"
+    ],
+    "mockKind": "bars",
+    "light": false,
+    "badge": "Realtime",
+    "mockTitle": "Ops Control",
+    "metrics": [
+      [
+        "45%",
+        "more efficient"
+      ],
+      [
+        "Realtime",
+        "fleet visibility"
+      ],
+      [
+        "1",
+        "source of truth"
+      ]
+    ],
+    "overview": "A logistics operator needed live visibility across a fragmented operation.",
+    "challenge": "Dispatch, fleet status, and delivery data were scattered across systems, making it impossible to spot bottlenecks until it was too late.",
+    "built": [
+      "A real-time operations control dashboard",
+      "Live fleet and shipment tracking",
+      "Automated exception alerts",
+      "Performance analytics by route and driver"
+    ],
+    "quote": "For the first time we can see the whole operation at a glance — and act before small issues become big ones.",
+    "quoteBy": "COO, logistics operator",
+    "blurb": "Real-time control center for fleet and delivery ops.",
+    "services": "Product Design, Full-stack Development",
+    "goal": "To give operations teams a single real-time control center for fleet, routes and deliveries — replacing manual tracking with live, automated visibility.",
+    "highlights": [
+      [
+        "35+",
+        "Screens & views"
+      ],
+      [
+        "60+",
+        "UI components"
+      ],
+      [
+        "28+",
+        "API endpoints"
+      ]
+    ]
+  },
+  {
+    "tag": "HealthTech",
+    "industry": "Healthcare",
+    "title": "Healthcare Booking Platform",
+    "timeline": "7 Weeks",
+    "big": "3×",
+    "rl": "appointment growth within the first quarter",
+    "tech": [
+      "React Native",
+      "Node",
+      "Stripe",
+      "Twilio"
+    ],
+    "mockKind": "kv",
+    "light": true,
+    "a": "64",
+    "b": "-30%",
+    "al": "Today",
+    "bl": "No-shows",
+    "badge": "+ Booking",
+    "mockTitle": "CareBook",
+    "metrics": [
+      [
+        "3×",
+        "appointment growth"
+      ],
+      [
+        "-30%",
+        "no-shows"
+      ],
+      [
+        "64",
+        "daily bookings"
+      ]
+    ],
+    "overview": "A multi-location clinic relied on phone bookings and a clunky calendar.",
+    "challenge": "Patients struggled to book outside office hours, no-shows were high, and front-desk staff spent the day on the phone.",
+    "built": [
+      "Online and mobile self-booking",
+      "Automated SMS and email reminders",
+      "Multi-practitioner scheduling",
+      "A simple admin view for the front desk"
+    ],
+    "quote": "Bookings tripled and no-shows dropped — patients love booking on their phone at midnight.",
+    "quoteBy": "Practice Manager, multi-site clinic",
+    "blurb": "Online booking and scheduling for clinics and patients.",
+    "services": "Product Design, Development",
+    "goal": "To make booking and managing appointments effortless for both clinics and patients, with automated reminders and clear scheduling visibility.",
+    "highlights": [
+      [
+        "30+",
+        "Screens & states"
+      ],
+      [
+        "55+",
+        "UI components"
+      ],
+      [
+        "32+",
+        "API endpoints"
+      ]
+    ]
+  },
+  {
+    "tag": "FinTech",
+    "industry": "SaaS · Analytics",
+    "title": "SaaS Analytics Platform",
+    "timeline": "10 Weeks",
+    "big": "2.5×",
+    "rl": "faster customer onboarding after the rebuild",
+    "tech": [
+      "Next.js",
+      "Python",
+      "BigQuery",
+      "dbt"
+    ],
+    "mockKind": "bars",
+    "light": false,
+    "badge": "Live",
+    "mockTitle": "Insight Analytics",
+    "metrics": [
+      [
+        "2.5×",
+        "faster onboarding"
+      ],
+      [
+        "Live",
+        "dashboards"
+      ],
+      [
+        "↑",
+        "retention"
+      ]
+    ],
+    "overview": "A fintech product's legacy analytics were slow and hard to onboard customers into.",
+    "challenge": "New customers took days to get value from clunky, slow reports, hurting activation and retention.",
+    "built": [
+      "A rebuilt, fast analytics dashboard",
+      "Self-serve onboarding flows",
+      "Customizable reports and exports",
+      "A scalable data pipeline"
+    ],
+    "quote": "Onboarding that took days now takes hours. Activation went up almost immediately.",
+    "quoteBy": "Product Lead, fintech platform",
+    "blurb": "Real-time analytics and reporting for product teams.",
+    "services": "Design, Full-stack Development",
+    "goal": "To turn scattered product data into clear, real-time insight — giving teams self-serve analytics and reporting without engineering bottlenecks.",
+    "highlights": [
+      [
+        "38+",
+        "Dashboard views"
+      ],
+      [
+        "65+",
+        "Chart & UI components"
+      ],
+      [
+        "40+",
+        "API endpoints"
+      ]
+    ]
+  },
+  {
+    "tag": "Local Services",
+    "industry": "Marketplace",
+    "title": "Marketplace for Tradespeople",
+    "timeline": "11 Weeks",
+    "big": "10k+",
+    "rl": "bookings processed in the first 90 days",
+    "tech": [
+      "React",
+      "Node",
+      "Stripe Connect",
+      "PostgreSQL"
+    ],
+    "mockKind": "kv",
+    "light": true,
+    "a": "10k+",
+    "b": "4.7",
+    "al": "Bookings",
+    "bl": "Rating",
+    "badge": "+ 1.2k",
+    "mockTitle": "TradeMatch",
+    "metrics": [
+      [
+        "10k+",
+        "bookings / 90 days"
+      ],
+      [
+        "4.7",
+        "avg rating"
+      ],
+      [
+        "2-sided",
+        "marketplace"
+      ]
+    ],
+    "overview": "A startup wanted to connect homeowners with vetted local tradespeople.",
+    "challenge": "They needed a trusted two-sided marketplace — discovery, booking, payments, and reviews — launched fast enough to capture demand.",
+    "built": [
+      "Provider profiles, search, and matching",
+      "In-app booking and scheduling",
+      "Secure payments and payouts",
+      "Ratings and reviews for trust"
+    ],
+    "quote": "We hit ten thousand bookings in our first quarter — the platform scaled with us from day one.",
+    "quoteBy": "Founder, local services marketplace",
+    "blurb": "Two-sided marketplace matching customers with vetted pros.",
+    "services": "Product, Design, Development",
+    "goal": "To connect customers with vetted tradespeople through a trusted two-sided marketplace that handles discovery, booking and payments end-to-end.",
+    "highlights": [
+      [
+        "42+",
+        "Screens & flows"
+      ],
+      [
+        "70+",
+        "UI components"
+      ],
+      [
+        "45+",
+        "API endpoints"
+      ]
+    ]
+  },
+  {
+    "tag": "SMB",
+    "industry": "Internal Tools",
+    "title": "Internal Operations CRM",
+    "timeline": "6 Weeks",
+    "big": "12→1",
+    "rl": "tools replaced by one unified internal system",
+    "tech": [
+      "Internal tooling",
+      "Node",
+      "PostgreSQL",
+      "REST APIs"
+    ],
+    "mockKind": "kv",
+    "light": false,
+    "a": "12→1",
+    "b": "98%",
+    "al": "Tools",
+    "bl": "Adoption",
+    "badge": "Unified",
+    "mockTitle": "OneDesk",
+    "metrics": [
+      [
+        "12→1",
+        "tools consolidated"
+      ],
+      [
+        "98%",
+        "team adoption"
+      ],
+      [
+        "Custom",
+        "workflow fit"
+      ]
+    ],
+    "overview": "An SMB ran its entire operation across a dozen disconnected apps.",
+    "challenge": "Data was duplicated across twelve tools, nothing synced, and onboarding new staff was painful.",
+    "built": [
+      "A custom internal CRM and ops hub",
+      "Unified customer and pipeline data",
+      "Role-based access and dashboards",
+      "Integrations with their existing stack"
+    ],
+    "quote": "One system replaced twelve. Everyone finally works from the same source of truth.",
+    "quoteBy": "Operations Director, SMB",
+    "blurb": "Custom CRM unifying sales, operations and support.",
+    "services": "Design, Internal Tools Development",
+    "goal": "To unify sales, operations and support in one internal CRM that removes duplicate data entry and gives every team a single source of truth.",
+    "highlights": [
+      [
+        "36+",
+        "Screens & modules"
+      ],
+      [
+        "60+",
+        "UI components"
+      ],
+      [
+        "38+",
+        "API endpoints"
+      ]
+    ]
+  },
+  {
+    "tag": "Enterprise",
+    "industry": "Automation",
+    "title": "AI Workflow Automation",
+    "timeline": "9 Weeks",
+    "big": "1,000+",
+    "rl": "hours saved every month through automation",
+    "tech": [
+      "Python",
+      "LLM",
+      "Workflow APIs",
+      "Cloud Functions"
+    ],
+    "mockKind": "bars",
+    "light": false,
+    "badge": "Automated",
+    "mockTitle": "AutoFlow",
+    "metrics": [
+      [
+        "1,000+",
+        "hours saved / mo"
+      ],
+      [
+        "↓",
+        "manual errors"
+      ],
+      [
+        "24/7",
+        "automated runs"
+      ]
+    ],
+    "overview": "An enterprise team spent thousands of hours a month on repetitive manual processes.",
+    "challenge": "Critical workflows depended on manual data entry and copy-paste between systems — slow, error-prone, and impossible to scale.",
+    "built": [
+      "AI-assisted workflow automations",
+      "Automated data sync across systems",
+      "Exception handling with human-in-the-loop",
+      "Monitoring and audit logging"
+    ],
+    "quote": "We gave a thousand hours a month back to the team — and cut errors at the same time.",
+    "quoteBy": "VP Operations, enterprise",
+    "blurb": "Automations that remove manual, repetitive busywork.",
+    "services": "AI, Automation, Integration",
+    "goal": "To remove manual, repetitive busywork by orchestrating automations across the tools a business already uses — reliably and with full audit visibility.",
+    "highlights": [
+      [
+        "22+",
+        "Automation templates"
+      ],
+      [
+        "45+",
+        "UI components"
+      ],
+      [
+        "50+",
+        "Integrations & endpoints"
+      ]
+    ]
+  }
 ]
