@@ -1,6 +1,6 @@
 import BuildCard from '@/components/BuildCard';
 import FinalCta from '@/components/FinalCta';
-import HeroVisual from '@/components/HeroVisual';
+import HeroContent from '@/components/HeroContent';
 import { Arrow, Check, Cross } from '@/components/Glyphs';
 import ProjectCard from '@/components/ProjectCard';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
@@ -19,30 +19,14 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <>
-      <section className="hero"><div className="wrap hero-grid">
-        <div>
-          <span className="kicker reveal">Product Studio · US / UK / EU / CA / Africa</span>
-          <h1 className="reveal d1">Build Products <span className="em">Faster.</span> Launch <span className="em">Sooner.</span> Grow <span className="em">Quicker.</span></h1>
-          <p className="lead reveal d2">We design, build, automate, and launch SaaS platforms, AI products, websites, MVPs, and internal tools for businesses worldwide.</p>
-          <div className="hero-cta reveal d3">
-            <Link href="/contact" className="btn btn-primary">Book Free Strategy Call <Arrow /></Link>
-            <Link href="/work" className="btn btn-ghost">View Our Work</Link>
-          </div>
-          <div className="cap-row reveal d4">
-            {['Strategy', 'Design', 'Development', 'AI', 'Launch', 'Maintenance'].map((c) => (
-              <span className="cap" key={c}><Check />{c}</span>
-            ))}
-          </div>
-        </div>
-        <div className="stage reveal d2">
-          <HeroVisual />
-        </div>
-      </div>
-      <div className="wrap"><div className="trust reveal">
-        <p>Trusted by startups, growing businesses, and enterprise teams worldwide</p>
+      <section className="hero"><div className="wrap">
+        <HeroContent />
+      </div></section>
+
+      <section className="trust-sec"><div className="wrap"><div className="trust reveal">
+        <p>Loved by startups, growing businesses &amp; enterprise teams worldwide</p>
         <div className="logos">{TRUST_LOGOS.map((l) => <span className="cl" key={l}>{/* <span className="g" /> placeholder logo shape — hidden until real company logos are available */}{l}</span>)}</div>
-      </div></div>
-      </section>
+      </div></div></section>
 
       <section className="sec" id="build"><div className="wrap">
         <div className="sec-head reveal"><span className="kicker">What We Build</span><h2 className="title">One partner for every product you need to ship.</h2>
