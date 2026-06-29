@@ -131,7 +131,7 @@
   {
     "tag": "AI",
     "industry": "SaaS · Support",
-    "title": "AI Customer Support Agent",
+    "title": "Resa",
     "timeline": "5 Weeks",
     "big": "80%",
     "rl": "faster response times with an AI-first support flow",
@@ -148,7 +148,7 @@
     "al": "Resolved",
     "bl": "CSAT",
     "badge": "● Live",
-    "mockTitle": "Support Copilot",
+    "mockTitle": "Resa",
     "metrics": [
       [
         "80%",
@@ -163,7 +163,7 @@
         "CSAT score"
       ]
     ],
-    "overview": "A growing SaaS company's support queue was outpacing its small team.",
+    "overview": "Resa is an AI customer-support platform that triages every incoming ticket, drafts high-confidence replies, auto-resolves common issues, and escalates the rest to the right human — across email, live chat and API.",
     "challenge": "Response times climbed as ticket volume grew, and hiring couldn't keep pace. Customers waited hours for answers already buried in the docs.",
     "built": [
       "An AI agent trained on their docs and past tickets (RAG)",
@@ -173,7 +173,7 @@
     ],
     "quote": "It handles the repetitive 80% instantly, so our humans focus on the cases that actually need them.",
     "quoteBy": "Head of Support, SaaS scale-up",
-    "blurb": "Autonomous agent that resolves support tickets end-to-end.",
+    "blurb": "AI support agent that drafts, resolves and routes tickets across channels.",
     "services": "AI Product, Integration, Development",
     "goal": "To build an autonomous support agent that resolves common tickets end-to-end, escalates the right cases to humans, and gives the team full visibility into every conversation.",
     "highlights": [
@@ -189,7 +189,9 @@
         "30+",
         "API & tool integrations"
       ]
-    ]
+    ],
+    "fullTitle": "Resa — AI Customer Support",
+    "prototype": "/prototypes/resa.html"
   },
   {
     "tag": "Logistics",

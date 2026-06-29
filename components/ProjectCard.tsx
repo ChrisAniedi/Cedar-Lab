@@ -1,20 +1,32 @@
+'use client';
 import Link from 'next/link';
+import type { MouseEvent } from 'react';
 import PrototypeFrame from './PrototypeFrame';
+
+// Cursor-following 3D tilt — the card angles toward the pointer, then eases back.
+function handleMove(e: MouseEvent<HTMLAnchorElement>) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - 0.5;
+  const y = (e.clientY - r.top) / r.height - 0.5;
+  el.style.transition = 'none';
+  el.style.transform = `perspective(950px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-8px)`;
+}
+function handleLeave(e: MouseEvent<HTMLAnchorElement>) {
+  const el = e.currentTarget;
+  el.style.transition = 'transform .45s cubic-bezier(.22,1,.36,1)';
+  el.style.transform = '';
+}
 
 export interface ProjectCardData {
   id: number; slug: string; tag: string; industry: string; title: string;
-  blurb?: string; tech: string[]; mock: string; prototypeHtml?: string;
+  blurb?: string; tech: string[]; mock: string; prototypeHtml?: string; images?: string[];
   timeline: string; big: string; rl: string;
 }
 
-const FRAME_TINTS = [
-  'linear-gradient(145deg,#26314b 0%,#0d1019 70%)',
-  'linear-gradient(145deg,#2a2442 0%,#0e0c17 70%)',
-  'linear-gradient(145deg,#123034 0%,#0a1413 70%)',
-  'linear-gradient(145deg,#33291a 0%,#14100a 70%)',
-  'linear-gradient(145deg,#1c2e46 0%,#0b0f17 70%)',
-  'linear-gradient(145deg,#2e1f2e 0%,#120b12 70%)',
-];
+// One consistent frame tint for every card, so the grid reads as a cohesive
+// set rather than a patchwork of different-coloured boxes.
+const FRAME_TINT = 'linear-gradient(150deg,#1c2336 0%,#0c0e15 78%)';
 const LOGO_TINTS = [
   'linear-gradient(135deg,#7B6CF6,#5B4DE0)',
   'linear-gradient(135deg,#3B82F6,#1A4FBA)',
@@ -36,20 +48,25 @@ const BRAND_LOGOS: Record<string, { bg: string; svg: React.ReactNode }> = {
     ),
   },
   hovra: {
-    bg: '#1A4FBA',
+    bg: 'linear-gradient(135deg,#3B82F6,#2057D8)',
     svg: (
-      <svg width="19" height="19" viewBox="0 0 16 16" fill="none">
-        <rect x="1" y="1" width="6" height="6" rx="1.5" fill="white" />
-        <rect x="9" y="1" width="6" height="6" rx="1.5" fill="white" opacity="0.6" />
-        <rect x="1" y="9" width="6" height="6" rx="1.5" fill="white" opacity="0.6" />
-        <rect x="9" y="9" width="6" height="6" rx="1.5" fill="white" opacity="0.3" />
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M3 9.3 10 4l7 5.3V16a1 1 0 0 1-1 1h-3.3v-4.4H7.3V17H4a1 1 0 0 1-1-1z" stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  resa: {
+    bg: 'linear-gradient(135deg,#8B5CF6,#6D28D9)',
+    svg: (
+      <svg width="19" height="19" viewBox="0 0 14 14" fill="none">
+        <path d="M7 1.5C4.2 1.5 2 3.5 2 6c0 1.3.6 2.4 1.5 3.2L3 11l2.2-1.1C5.7 10 6.4 10.2 7 10.2c2.8 0 5-2 5-4.2S9.8 1.5 7 1.5z" stroke="white" strokeWidth="1.3" />
       </svg>
     ),
   },
 };
 
 export default function ProjectCard({ p, className = 'reveal' }: { p: ProjectCardData; className?: string }) {
-  const frame = FRAME_TINTS[p.id % FRAME_TINTS.length];
+  const frame = FRAME_TINT;
   const brand = BRAND_LOGOS[p.slug];
   const tags = Array.from(
     new Set([p.tag, ...p.industry.split('·').map((s) => s.trim())].filter(Boolean)),
@@ -57,12 +74,15 @@ export default function ProjectCard({ p, className = 'reveal' }: { p: ProjectCar
   const mono = (p.title.replace(/[^A-Za-z0-9]/g, '')[0] || '?').toUpperCase();
 
   return (
-    <Link href={`/work/${p.slug}`} className={`pcard ${className}`}>
+    <Link href={`/work/${p.slug}`} className={`pcard ${className}`} onMouseMove={handleMove} onMouseLeave={handleLeave}>
       <div className="pshot" style={{ background: frame }}>
         <div className="pshot-frame">
           {p.prototypeHtml
             ? <PrototypeFrame html={p.prototypeHtml} title={`${p.title} preview`} />
-            : <div className="pshot-mock" dangerouslySetInnerHTML={{ __html: p.mock }} />}
+            : p.images && p.images[0]
+              // eslint-disable-next-line @next/next/no-img-element
+              ? <img className="pshot-img" src={p.images[0]} alt={`${p.title} preview`} loading="lazy" />
+              : <div className="pshot-mock" dangerouslySetInnerHTML={{ __html: p.mock }} />}
         </div>
       </div>
 
