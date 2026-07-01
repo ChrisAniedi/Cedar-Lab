@@ -1,6 +1,4 @@
 import ClientEffects from '@/components/ClientEffects';
-import Footer from '@/components/Footer';
-import Nav from '@/components/Nav';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -28,9 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <Nav />
         {children}
-        <Footer />
         <ClientEffects />
       </body>
     </html>

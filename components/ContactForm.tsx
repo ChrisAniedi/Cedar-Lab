@@ -2,9 +2,14 @@
 import { useState } from 'react';
 import { Arrow } from './Glyphs';
 
-export default function ContactForm() {
+export default function ContactForm({ variant }: { variant?: 'local' }) {
+  const local = variant === 'local';
   const [sent, setSent] = useState(false);
-  const [msg, setMsg] = useState("We'll review your project and reply within one business day with next steps and an estimate.");
+  const [msg, setMsg] = useState(
+    local
+      ? "Thanks — we'll put together a free mockup and get back to you, usually within one business day."
+      : "We'll review your project and reply within one business day with next steps and an estimate.",
+  );
   const [busy, setBusy] = useState(false);
   const [emailErr, setEmailErr] = useState(false);
 
@@ -37,28 +42,43 @@ export default function ContactForm() {
     );
   }
 
+  const budgetOptions = local
+    ? ['Not sure yet', 'Under $1k', '$1k – $2k', '$2k – $5k', '$5k+']
+    : ['Not sure yet', 'Under $5k', '$5k – $15k', '$15k – $50k', '$50k+'];
+  const projectOptions = local
+    ? ['New website', 'Website redesign', 'One-page site', 'Booking / quote site', 'Not sure']
+    : ['Landing page', 'Website', 'MVP', 'SaaS platform', 'AI product / agent', 'Automation', 'Mobile app', 'Other'];
+  const messagePlaceholder = local
+    ? 'A few sentences about your business, services, goals, timeline, etc.'
+    : 'A few sentences about your product, goals, and timeline...';
+
   return (
     <form onSubmit={onSubmit} noValidate>
       <div className="frow">
         <div className="field" style={{ margin: 0 }}><label>Full name</label><input name="name" type="text" placeholder="Jane Doe" required /></div>
-        <div className="field" style={{ margin: 0 }}><label>Work email</label>
-          <input name="email" type="email" placeholder="jane@company.com" required style={emailErr ? { borderColor: '#ef5a5a' } : undefined} />
+        <div className="field" style={{ margin: 0 }}><label>Email</label>
+          <input name="email" type="email" placeholder={local ? 'jane@yourbusiness.co.uk' : 'jane@company.com'} required style={emailErr ? { borderColor: '#ef5a5a' } : undefined} />
         </div>
       </div>
       <div className="frow">
-        <div className="field" style={{ margin: 0 }}><label>Company</label><input name="company" type="text" placeholder="Company name" /></div>
-        <div className="field" style={{ margin: 0 }}><label>Project type</label>
-          <select name="projectType"><option>Landing page</option><option>Website</option><option>MVP</option><option>SaaS platform</option><option>AI product / agent</option><option>Automation</option><option>Mobile app</option><option>Other</option></select>
+        <div className="field" style={{ margin: 0 }}><label>{local ? 'Business name' : 'Company'}</label><input name="company" type="text" placeholder={local ? 'Your business name' : 'Company name'} /></div>
+        <div className="field" style={{ margin: 0 }}><label>{local ? 'What you need' : 'Project type'}</label>
+          <select name="projectType">{projectOptions.map((o) => <option key={o}>{o}</option>)}</select>
         </div>
       </div>
-      <div className="field"><label>Budget range</label>
-        <select name="budget"><option>Not sure yet</option><option>Under $5k</option><option>$5k – $15k</option><option>$15k – $50k</option><option>$50k+</option></select>
+      {local && (
+        <div className="field"><label>Current website <span className="opt">(optional)</span></label>
+          <input name="website" type="text" placeholder="yourbusiness.co.uk — leave blank if you don't have one yet" />
+        </div>
+      )}
+      <div className="field"><label>Budget</label>
+        <select name="budget">{budgetOptions.map((o) => <option key={o}>{o}</option>)}</select>
       </div>
-      <div className="field"><label>What do you want to build?</label>
-        <textarea name="message" placeholder="A few sentences about your product, goals, and timeline..." />
+      <div className="field"><label>{local ? 'Tell us about your business' : 'What do you want to build?'}</label>
+        <textarea name="message" placeholder={messagePlaceholder} />
       </div>
       <button type="submit" className="btn btn-primary" disabled={busy}>
-        {busy ? 'Sending…' : <>Send &amp; Book a Call <Arrow /></>}
+        {busy ? 'Sending…' : local ? <>Get My Free Mockup <Arrow /></> : <>Send &amp; Book a Call <Arrow /></>}
       </button>
     </form>
   );
