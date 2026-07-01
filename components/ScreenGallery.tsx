@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Horizontal scroll-snap gallery (shows ~2 screens + a peek) with a full-screen
 // lightbox you can navigate with the buttons or arrow keys.
-export default function ScreenGallery({ images, title }: { images: string[]; title: string }) {
+export default function ScreenGallery({ images, title, mobile }: { images: string[]; title: string; mobile?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState<number | null>(null);
 
@@ -32,7 +32,7 @@ export default function ScreenGallery({ images, title }: { images: string[]; tit
   }, [open, close, step]);
 
   return (
-    <div className="sg">
+    <div className={`sg${mobile ? ' sg-mobile' : ''}`}>
       <div className="sg-head">
         <h2>Screens</h2>
         <div className="sg-ctrl">

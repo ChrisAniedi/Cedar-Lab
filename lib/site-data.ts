@@ -1,17 +1,6 @@
-import { readdirSync, readFileSync } from 'fs';
+import { readdirSync } from 'fs';
 import { join } from 'path';
 import casesJson from './cases.json';
-
-// Read a prototype HTML file from /public at build time so it can be rendered
-// inline via <iframe srcDoc> (no extra request, and no browser-history pollution).
-function readPrototype(rel?: string): string | undefined {
-  if (!rel) return undefined;
-  try {
-    return readFileSync(join(process.cwd(), 'public', rel.replace(/^\//, '')), 'utf8');
-  } catch {
-    return undefined;
-  }
-}
 
 export interface BuildItem { name: string; desc: string; icon: string }
 export interface ProcessStep { title: string; desc: string }
@@ -26,8 +15,8 @@ export interface Market { flag: string; name: string }
 export interface CaseStudy {
   tag: string; industry: string; title: string; timeline: string; big: string; rl: string;
   tech: string[]; mockKind: 'kv' | 'bars'; light: boolean; badge: string; mockTitle: string;
-  a?: string; b?: string; al?: string; bl?: string; prototype?: string; blurb?: string; services?: string;
-  fullTitle?: string; goal?: string; highlights?: [string, string][];
+  a?: string; b?: string; al?: string; bl?: string; blurb?: string; services?: string;
+  fullTitle?: string; goal?: string; highlights?: [string, string][]; mobile?: boolean;
   metrics: [string, string][]; overview: string; challenge: string; built: string[]; quote: string; quoteBy: string;
 }
 
@@ -62,7 +51,7 @@ function mockHtml(c: CaseStudy): string {
 // Projects = cases enriched with rendered mock markup, a stable id, and a url slug.
 export const PROJECTS = CASES.map((c, i) => {
   const slug = slugify(c.title);
-  return { ...c, id: i, slug, mock: mockHtml(c), prototypeHtml: readPrototype(c.prototype), images: listImages(slug) };
+  return { ...c, id: i, slug, mock: mockHtml(c), images: listImages(slug) };
 });
 
 export type Project = (typeof PROJECTS)[number];

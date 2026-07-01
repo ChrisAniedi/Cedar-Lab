@@ -1,6 +1,0 @@
-/* A non-interactive, screenshot-style render of a self-contained HTML prototype.
-   The 1280x800 doc is scaled to the container width with container-query units,
-   so it stays crisp at any card/hero size. pointer-events are disabled so the
-   product reads as a screenshot — viewers can't interact with it. */
-.frame{position:relative;width:100%;aspect-ratio:16 / 10;overflow:hidden;container-type:inline-size;background:#0F172A;border-radius:10px}
-.frame iframe{width:1280px;height:800px;border:0;transform-origin:top left;transform:scale(calc(100cqw / 1280));pointer-events:none}

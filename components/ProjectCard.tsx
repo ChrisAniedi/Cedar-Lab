@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 import type { MouseEvent } from 'react';
-import PrototypeFrame from './PrototypeFrame';
 
 // Cursor-following 3D tilt — the card angles toward the pointer, then eases back.
 function handleMove(e: MouseEvent<HTMLAnchorElement>) {
@@ -20,7 +19,7 @@ function handleLeave(e: MouseEvent<HTMLAnchorElement>) {
 
 export interface ProjectCardData {
   id: number; slug: string; tag: string; industry: string; title: string;
-  blurb?: string; tech: string[]; mock: string; prototypeHtml?: string; images?: string[];
+  blurb?: string; tech: string[]; mock: string; images?: string[]; mobile?: boolean;
   timeline: string; big: string; rl: string;
 }
 
@@ -63,6 +62,36 @@ const BRAND_LOGOS: Record<string, { bg: string; svg: React.ReactNode }> = {
       </svg>
     ),
   },
+  solara: {
+    bg: 'linear-gradient(135deg,#F5A623,#FF8C00)',
+    svg: (
+      <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="3" fill="white" />
+        <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.2 3.2l1.4 1.4M11.4 11.4l1.4 1.4M3.2 12.8l1.4-1.4M11.4 4.6l1.4-1.4" stroke="white" strokeWidth="1.3" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  tracklo: {
+    bg: 'linear-gradient(135deg,#FB923C,#F97316)',
+    svg: (
+      <svg width="20" height="20" viewBox="0 0 14 14" fill="none">
+        <rect x="1" y="5" width="9" height="7" rx="1" stroke="white" strokeWidth="1.3" />
+        <path d="M10 7h2l1.5 2.5V12h-3.5" stroke="white" strokeWidth="1.3" strokeLinejoin="round" />
+        <circle cx="4" cy="12" r="1.5" stroke="white" strokeWidth="1.2" />
+        <circle cx="10.5" cy="12" r="1.5" stroke="white" strokeWidth="1.2" />
+      </svg>
+    ),
+  },
+  finch: {
+    bg: 'linear-gradient(135deg,#818CF8,#6366F1)',
+    svg: (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <rect x="2.5" y="4.5" width="15" height="11" rx="2.5" stroke="white" strokeWidth="1.5" />
+        <path d="M2.5 8.5h15" stroke="white" strokeWidth="1.5" />
+        <path d="M5.5 12.5h3" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
+  },
 };
 
 export default function ProjectCard({ p, className = 'reveal' }: { p: ProjectCardData; className?: string }) {
@@ -77,12 +106,10 @@ export default function ProjectCard({ p, className = 'reveal' }: { p: ProjectCar
     <Link href={`/work/${p.slug}`} className={`pcard ${className}`} onMouseMove={handleMove} onMouseLeave={handleLeave}>
       <div className="pshot" style={{ background: frame }}>
         <div className="pshot-frame">
-          {p.prototypeHtml
-            ? <PrototypeFrame html={p.prototypeHtml} title={`${p.title} preview`} />
-            : p.images && p.images[0]
-              // eslint-disable-next-line @next/next/no-img-element
-              ? <img className="pshot-img" src={p.images[0]} alt={`${p.title} preview`} loading="lazy" />
-              : <div className="pshot-mock" dangerouslySetInnerHTML={{ __html: p.mock }} />}
+          {p.images && p.images[0]
+            // eslint-disable-next-line @next/next/no-img-element
+            ? <img className={`pshot-img${p.mobile ? ' pshot-img-mobile' : ''}`} src={p.images[0]} alt={`${p.title} preview`} loading="lazy" />
+            : <div className="pshot-mock" dangerouslySetInnerHTML={{ __html: p.mock }} />}
         </div>
       </div>
 

@@ -1,7 +1,6 @@
 import FinalCta from '@/components/FinalCta';
 import { Arrow, Check } from '@/components/Glyphs';
 import ProjectCard from '@/components/ProjectCard';
-import PrototypeFrame from '@/components/PrototypeFrame';
 import ScreenGallery from '@/components/ScreenGallery';
 import { getProject, PROJECTS } from '@/lib/site-data';
 import type { Metadata } from 'next';
@@ -44,13 +43,11 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       </div></section>
 
       <section className="cs-shot-wrap"><div className="wrap">
-        <figure className="cs-shot reveal">
+        <figure className={`cs-shot reveal${p.mobile ? ' cs-shot-mobile' : ''}`}>
           {images[0]
             // eslint-disable-next-line @next/next/no-img-element
             ? <img className="cs-hero-img" src={images[0]} alt={`${title} — main screen`} />
-            : p.prototypeHtml
-              ? <PrototypeFrame html={p.prototypeHtml} title={`${title} product screenshot`} />
-              : <div className="cs-mock" dangerouslySetInnerHTML={{ __html: p.mock }} />}
+            : <div className="cs-mock" dangerouslySetInnerHTML={{ __html: p.mock }} />}
         </figure>
       </div></section>
 
@@ -114,7 +111,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
       {images.length > 1 && (
         <section className="sec cs-screens"><div className="wrap">
-          <ScreenGallery images={images.slice(1)} title={title} />
+          <ScreenGallery images={images.slice(1)} title={title} mobile={p.mobile} />
         </div></section>
       )}
 

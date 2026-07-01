@@ -44,7 +44,6 @@
     ],
     "quote": "Talently surfaces our best-fit candidates the moment they apply. We cut time-to-hire almost in half and stopped losing great people to slow screening.",
     "quoteBy": "Head of Talent, scaling tech company",
-    "prototype": "/prototypes/talently.html",
     "blurb": "AI recruiting platform that screens and ranks every applicant.",
     "services": "AI Product, Design, Full-stack Development",
     "goal": "To design an AI hiring platform that feels effortless to use, replaces manual CV screening with intelligent candidate matching, and gives the talent team clear visibility into every stage of the pipeline.",
@@ -108,7 +107,6 @@
     ],
     "quote": "We replaced four tools and a mountain of spreadsheets with one platform. Our team got their week back.",
     "quoteBy": "Operations Lead, Adeyemi Realty Group",
-    "prototype": "/prototypes/hovra.html",
     "blurb": "Property management platform for a 300+ unit portfolio.",
     "services": "Product Design, Full-stack Development",
     "goal": "To replace spreadsheets and disconnected tools with one platform that makes managing units, tenants, rent and maintenance effortless — with real-time visibility across the whole portfolio.",
@@ -190,13 +188,75 @@
         "API & tool integrations"
       ]
     ],
-    "fullTitle": "Resa — AI Customer Support",
-    "prototype": "/prototypes/resa.html"
+    "fullTitle": "Resa — AI Customer Support"
+  },
+  {
+    "tag": "Web",
+    "industry": "Clean Energy · Solar",
+    "title": "Solara",
+    "fullTitle": "Solara Energy",
+    "timeline": "3 Weeks",
+    "big": "2.4×",
+    "rl": "increase in free-quote requests after launch",
+    "tech": [
+      "Next.js",
+      "Tailwind",
+      "Vercel"
+    ],
+    "mockKind": "kv",
+    "light": false,
+    "badge": "+ New",
+    "mockTitle": "Solara",
+    "a": "2.4×",
+    "al": "Quote reqs",
+    "b": "70%",
+    "bl": "Bill cut",
+    "blurb": "High-converting landing page for a London solar installer.",
+    "services": "Brand, Web Design, Development",
+    "goal": "To turn solar curiosity into booked surveys — a landing page that makes the savings obvious, builds trust fast, and removes every barrier to requesting a free quote.",
+    "highlights": [
+      [
+        "6",
+        "Services showcased"
+      ],
+      [
+        "4",
+        "Trust certifications"
+      ],
+      [
+        "100",
+        "Lighthouse score"
+      ]
+    ],
+    "metrics": [
+      [
+        "2.4×",
+        "more quote requests"
+      ],
+      [
+        "100",
+        "Lighthouse score"
+      ],
+      [
+        "3 wks",
+        "design to launch"
+      ]
+    ],
+    "overview": "Solara Energy is a London solar-panel installer. We designed and built a conversion-focused landing page with a dusk-to-dawn solar aesthetic, a live savings calculator, trust badges, and a frictionless quote form.",
+    "challenge": "Solar is a high-cost, high-consideration purchase. Visitors needed to grasp the savings, trust the installer, and feel confident requesting a quote — all within the first screen.",
+    "built": [
+      "A savings-calculator hero showing annual savings, CO₂ cut and payback period",
+      "Service breakdown — panels, battery storage, EV charging and commercial",
+      "A trust layer with MCS / Trustmark badges, 4.9★ reviews and warranties",
+      "A short, friendly quote form with grant-eligibility prompts"
+    ],
+    "quote": "The new site does the selling for us — people arrive already understanding the savings and book a survey.",
+    "quoteBy": "Founder, Solara Energy"
   },
   {
     "tag": "Logistics",
-    "industry": "Logistics",
-    "title": "Logistics Operations Dashboard",
+    "industry": "Logistics · Fleet Ops",
+    "title": "Tracklo",
     "timeline": "8 Weeks",
     "big": "45%",
     "rl": "increase in operational efficiency company-wide",
@@ -209,7 +269,7 @@
     "mockKind": "bars",
     "light": false,
     "badge": "Realtime",
-    "mockTitle": "Ops Control",
+    "mockTitle": "Tracklo",
     "metrics": [
       [
         "45%",
@@ -224,7 +284,7 @@
         "source of truth"
       ]
     ],
-    "overview": "A logistics operator needed live visibility across a fragmented operation.",
+    "overview": "Tracklo is a logistics operations platform for a London fleet — a real-time control center for vehicles, shipments and deliveries, with a live fleet map, on-time tracking, and driver performance all in one view.",
     "challenge": "Dispatch, fleet status, and delivery data were scattered across systems, making it impossible to spot bottlenecks until it was too late.",
     "built": [
       "A real-time operations control dashboard",
@@ -234,7 +294,7 @@
     ],
     "quote": "For the first time we can see the whole operation at a glance — and act before small issues become big ones.",
     "quoteBy": "COO, logistics operator",
-    "blurb": "Real-time control center for fleet and delivery ops.",
+    "blurb": "Real-time control center for fleet, routes and deliveries.",
     "services": "Product Design, Full-stack Development",
     "goal": "To give operations teams a single real-time control center for fleet, routes and deliveries — replacing manual tracking with live, automated visibility.",
     "highlights": [
@@ -250,7 +310,72 @@
         "28+",
         "API endpoints"
       ]
-    ]
+    ],
+    "fullTitle": "Tracklo — Logistics Operations"
+  },
+  {
+    "tag": "Fintech",
+    "industry": "Fintech · Mobile",
+    "title": "Finch",
+    "fullTitle": "Finch — Personal Banking",
+    "mobile": true,
+    "timeline": "6 Weeks",
+    "big": "4.9★",
+    "rl": "average app rating after launch",
+    "tech": [
+      "React Native",
+      "TypeScript",
+      "Node"
+    ],
+    "mockKind": "kv",
+    "light": false,
+    "badge": "+ New",
+    "mockTitle": "Finch",
+    "a": "4.9★",
+    "al": "Rating",
+    "b": "<2s",
+    "bl": "Transfers",
+    "blurb": "A clean neobank app for balances, cards, bills and spending.",
+    "services": "Product Design, Mobile Development",
+    "goal": "To make everyday money management feel calm and effortless — a fintech app where your balance, payments and spending are always one glance away.",
+    "highlights": [
+      [
+        "12+",
+        "App screens designed"
+      ],
+      [
+        "3",
+        "Core user flows"
+      ],
+      [
+        "4.9★",
+        "Launch rating"
+      ]
+    ],
+    "metrics": [
+      [
+        "4.9★",
+        "App Store rating"
+      ],
+      [
+        "<2s",
+        "transfer time"
+      ],
+      [
+        "3",
+        "core flows shipped"
+      ]
+    ],
+    "overview": "Finch is a consumer fintech app — a clean, dark mobile experience for tracking balances, managing cards, paying bills, sending money and understanding spending at a glance.",
+    "challenge": "Personal finance apps are cluttered and intimidating. Users needed to see their balance, move money, and understand spending in seconds — without a steep learning curve.",
+    "built": [
+      "A home dashboard with balance, income/expenses and quick actions",
+      "Send, request and bill-pay flows in a few taps",
+      "Spending analytics with weekly, monthly and yearly views",
+      "A clean, dark, accessible mobile design system"
+    ],
+    "quote": "It's the first banking app my customers actually enjoy opening.",
+    "quoteBy": "Product Lead, Finch"
   },
   {
     "tag": "HealthTech",
