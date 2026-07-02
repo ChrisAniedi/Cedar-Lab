@@ -33,7 +33,7 @@ const WHY = [
 
 type Example = {
   title: string; blurb: string; tags: string[]; big: string; rl: string; timeline: string; tech: string[];
-  logo: { txt: string; bg: string }; tint: string; mockHtml: string;
+  logo: { txt: string; bg: string }; tint: string; mockHtml?: string; img?: string;
 };
 
 // Rough "site preview" mock in the same style as the main-site cards.
@@ -54,7 +54,7 @@ const fromProject = (slug: string, txt: string, bg: string, tint: string): Examp
   return p ? {
     title: p.fullTitle ?? p.title, blurb: p.blurb ?? '', tags: tagsOf(p.tag, p.industry),
     big: p.big, rl: p.rl, timeline: p.timeline, tech: p.tech,
-    logo: { txt, bg }, tint, mockHtml: p.mock,
+    logo: { txt, bg }, tint, img: p.images?.[0], mockHtml: p.mock,
   } : null;
 };
 
@@ -145,7 +145,12 @@ export default function LocalBusiness() {
           {EXAMPLES.map((ex, i) => (
             <div className={`pcard reveal d${i % 3}`} key={ex.title}>
               <div className="pshot" style={{ background: ex.tint }}>
-                <div className="pshot-frame"><div className="pshot-mock" dangerouslySetInnerHTML={{ __html: ex.mockHtml }} /></div>
+                <div className="pshot-frame">
+                  {ex.img
+                    // eslint-disable-next-line @next/next/no-img-element
+                    ? <img className="pshot-img" src={ex.img} alt={`${ex.title} preview`} loading="lazy" />
+                    : <div className="pshot-mock" dangerouslySetInnerHTML={{ __html: ex.mockHtml ?? '' }} />}
+                </div>
               </div>
               <div className="ptags">{ex.tags.map((t) => <span key={t}>{t}</span>)}</div>
               <div className="pfoot">
