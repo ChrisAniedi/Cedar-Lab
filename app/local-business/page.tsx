@@ -1,5 +1,6 @@
 import ContactForm from '@/components/ContactForm';
 import { Arrow, Check } from '@/components/Glyphs';
+import LandingWork, { type Example } from '@/components/LandingWork';
 import { Icon } from '@/lib/icons';
 import { PROJECTS } from '@/lib/site-data';
 import type { Metadata } from 'next';
@@ -31,41 +32,46 @@ const WHY = [
   { t: 'Built by a real team', d: 'Designed and built by people — not a drag-and-drop template generator.' },
 ];
 
-type Example = {
-  title: string; blurb: string; tags: string[]; big: string; rl: string; timeline: string; tech: string[];
-  logo: { txt: string; bg: string }; tint: string; mockHtml?: string; img?: string;
-};
-
-// Rough "site preview" mock in the same style as the main-site cards.
-function buildMock(title: string, kind: 'kv' | 'bars', kv?: { a: string; al: string; b: string; bl: string }) {
-  const body = kind === 'bars'
-    ? '<div class="barz"><i style="height:50%"></i><i style="height:72%"></i><i style="height:45%"></i><i style="height:90%"></i><i style="height:65%"></i><i style="height:82%"></i></div><div class="lines"><i></i><i></i></div>'
-    : `<div class="grid2"><div class="box"><div class="bl">${kv!.al}</div><div class="bv">${kv!.a}</div></div><div class="box"><div class="bl">${kv!.bl}</div><div class="bv">${kv!.b}</div></div></div><div class="lines"><i></i><i></i><i></i></div>`;
-  return `<div class="ms ms-dark"><div class="mhd"><span class="t">${title}</span><span class="b">Concept</span></div>${body}</div>`;
-}
-
 const tagsOf = (tag: string, industry: string) =>
   Array.from(new Set([tag, ...industry.split('·').map((t) => t.trim())].filter(Boolean))).slice(0, 3);
 
-// Reuse the real Solara project so nothing is duplicated — details come straight
-// from the shared case data. Fill the other two in as their details arrive.
+// Reuse real projects so nothing is duplicated — card + modal detail come
+// straight from the shared case data.
 const fromProject = (slug: string, txt: string, bg: string, tint: string): Example | null => {
   const p = PROJECTS.find((x) => x.slug === slug);
+  const imgs = p?.images ?? [];
   return p ? {
     title: p.fullTitle ?? p.title, blurb: p.blurb ?? '', tags: tagsOf(p.tag, p.industry),
     big: p.big, rl: p.rl, timeline: p.timeline, tech: p.tech,
-    logo: { txt, bg }, tint, img: p.images?.[0], mockHtml: p.mock,
+    logo: { txt, bg }, tint, img: imgs[0], mockHtml: p.mock, gallery: imgs.slice(1),
+    services: p.services, industry: p.industry, metrics: p.metrics,
+    overview: p.overview, challenge: p.challenge, built: p.built, quote: p.quote, quoteBy: p.quoteBy,
   } : null;
 };
 
 const EXAMPLES: Example[] = [
   fromProject('solara', 'S', 'linear-gradient(135deg,#F5A623,#FF8C00)', 'linear-gradient(145deg,#33291a,#14100a)'),
   fromProject('grain-co', 'G', 'linear-gradient(135deg,#D89A4A,#C8873A)', 'linear-gradient(145deg,#2c231a,#141008)'),
+  // Concept local-business site — lives only on this landing page, not in the main portfolio.
   {
-    title: 'City Salon & Spa', blurb: 'Booking-focused site that keeps the calendar full.',
-    tags: ['Web', 'Hospitality'], big: '2×', rl: 'online bookings vs before', timeline: '7 Days',
-    tech: ['Next.js', 'Stripe'], logo: { txt: 'C', bg: 'linear-gradient(135deg,#F472B6,#C026D3)' },
-    tint: 'linear-gradient(145deg,#2e1f2e,#120b12)', mockHtml: buildMock('City Salon & Spa', 'bars'),
+    title: 'Hawkins & Sons', blurb: 'Site for a family-run London plumbing firm — built to turn searches into booked visits.',
+    tags: ['Web', 'Local Services', 'Plumbing'], big: '+42%', rl: 'more booking calls in month one', timeline: '6 Days',
+    tech: ['Next.js', 'Tailwind', 'Vercel'], logo: { txt: 'H', bg: 'linear-gradient(135deg,#D4A24A,#B5832E)' },
+    tint: 'linear-gradient(145deg,#1b2536,#0b0f17)',
+    img: '/work/hawkins-sons/01-hero.webp',
+    gallery: ['02-services', '03-about', '04-process', '05-reviews', '06-contact'].map((f) => `/work/hawkins-sons/${f}.webp`),
+    services: 'Web Design, Development, Local SEO', industry: 'Local Services · Plumbing',
+    metrics: [['+42%', 'more calls'], ['24/7', 'emergency line'], ['6 days', 'design to launch']],
+    overview: 'Hawkins & Sons is a family-run London plumbing firm going since 1987. We built a fast, trustworthy site that leads with their 24/7 emergency line and one-tap calling, so people in a pinch reach them first.',
+    challenge: 'Plumbing is an urgent, trust-driven buy — often from a phone, mid-emergency. The site had to load instantly, prove credibility fast (Gas Safe, Which? Trusted Trader, guarantees), and make calling or booking effortless.',
+    built: [
+      'A calm, credible hero with a click-to-call emergency line',
+      'Clear services — from burst pipes to full bathroom installs',
+      'A trust layer: Gas Safe, Which? Trusted Trader, 1-year guarantee',
+      'A simple “book a visit” request form and directions',
+    ],
+    quote: 'The phone rings with the right jobs now. It finally looks as reliable as we actually are.',
+    quoteBy: 'Owner, Hawkins & Sons',
   },
 ].filter((e): e is Example => e !== null);
 
@@ -141,32 +147,7 @@ export default function LocalBusiness() {
       <section className="sec" style={{ paddingTop: 0 }}><div className="wrap">
         <div className="sec-head center reveal"><span className="kicker">Recent Work</span><h2 className="title">Sites we&apos;ve designed.</h2>
           <p className="lead">Clean, fast, conversion-focused pages built for real businesses.</p></div>
-        <div className="proj-grid">
-          {EXAMPLES.map((ex, i) => (
-            <div className={`pcard reveal d${i % 3}`} key={ex.title}>
-              <div className="pshot" style={{ background: ex.tint }}>
-                <div className="pshot-frame">
-                  {ex.img
-                    // eslint-disable-next-line @next/next/no-img-element
-                    ? <img className="pshot-img" src={ex.img} alt={`${ex.title} preview`} loading="lazy" />
-                    : <div className="pshot-mock" dangerouslySetInnerHTML={{ __html: ex.mockHtml ?? '' }} />}
-                </div>
-              </div>
-              <div className="ptags">{ex.tags.map((t) => <span key={t}>{t}</span>)}</div>
-              <div className="pfoot">
-                <span className="plogo" style={{ background: ex.logo.bg }} aria-hidden>{ex.logo.txt}</span>
-                <div className="pf-txt"><div className="ptitle">{ex.title}</div><div className="pdesc">{ex.blurb}</div></div>
-              </div>
-              <div className="pcard-meta">
-                <div className="pcard-result"><span className="big">{ex.big}</span><span className="rl">{ex.rl}</span></div>
-                <div className="pcard-sub">
-                  <span className="pcard-time">⏱ {ex.timeline}</span>
-                  <div className="pcard-tech">{ex.tech.slice(0, 3).map((t) => <span key={t}>{t}</span>)}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <LandingWork items={EXAMPLES} />
       </div></section>
 
       {/* PACKAGES */}

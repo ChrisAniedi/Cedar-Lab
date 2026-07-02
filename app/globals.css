@@ -969,3 +969,45 @@ footer{border-top:1px solid var(--line);padding:72px 0 40px;position:relative;z-
 .lb-ex-mock{aspect-ratio:16 / 11;display:flex;padding:18px;background:#0F172A;border-bottom:1px solid var(--line)}
 .lb-ex-mock .ms{flex:1}
 .field .opt{color:var(--ink-3);font-weight:400;text-transform:none;letter-spacing:0}
+
+/* --- local-business: clickable work cards + detail modal --- */
+.lw-card{display:block;width:100%;text-align:left;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;transition:transform .45s var(--ease);will-change:transform}
+.lw-card:hover{transform:translateY(-8px)}
+.lw-view{display:inline-flex;align-items:center;gap:6px;margin:14px 2px 0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--acc);opacity:.85;transition:opacity .3s var(--ease),gap .3s var(--ease)}
+.lw-view svg{width:13px;height:13px}
+.lw-card:hover .lw-view{opacity:1;gap:9px}
+
+.lw-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:5vh 20px;background:rgba(4,5,7,.72);backdrop-filter:blur(6px);animation:lwFade .2s ease}
+@keyframes lwFade{from{opacity:0}to{opacity:1}}
+.lw-modal{position:relative;width:min(760px,100%);max-height:90vh;background:var(--bg-1);border:1px solid var(--line-2);border-radius:var(--r-lg);box-shadow:0 40px 120px -30px rgba(0,0,0,.9);overflow:hidden;animation:lwRise .28s var(--ease)}
+@keyframes lwRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.lw-close{position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-2);background:rgba(8,9,10,.6);color:var(--ink);cursor:pointer;transition:background .2s var(--ease),transform .2s var(--ease)}
+.lw-close:hover{background:var(--bg-3);transform:scale(1.06)}
+.lw-close svg{width:18px;height:18px}
+.lw-scroll{overflow-y:auto;max-height:90vh}
+.lw-hero{padding:26px 26px 0;border-bottom:1px solid var(--line)}
+.lw-hero-img{display:block;width:100%;height:auto;border-radius:10px 10px 0 0;box-shadow:0 24px 54px -22px rgba(0,0,0,.8)}
+.lw-hero .pshot-mock{aspect-ratio:16 / 10;display:flex;padding:16px;background:#0F172A;border-radius:10px 10px 0 0}
+.lw-body{padding:26px 30px 34px}
+.lw-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.lw-head h3{font-family:var(--serif);font-size:24px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px}
+.lw-lead{color:var(--ink-2);font-size:15.5px;line-height:1.6;margin:0 0 20px}
+.lw-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:26px}
+.lw-metrics .mm{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--bg-2)}
+.lw-metrics .v{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink)}
+.lw-metrics .l{font-size:12.5px;color:var(--ink-3);margin-top:3px}
+.lw-sec{margin-bottom:22px}
+.lw-sec h4{font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.09em;color:var(--acc);margin:0 0 9px}
+.lw-sec p{color:var(--ink-2);font-size:15px;line-height:1.65;margin:0}
+.lw-built{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.lw-built li{display:flex;gap:10px;align-items:flex-start;color:var(--ink-2);font-size:14.5px;line-height:1.5}
+.lw-built li svg{flex:none;width:17px;height:17px;color:var(--acc);margin-top:2px}
+.lw-shots{display:flex;gap:12px;overflow-x:auto;margin:0 -30px 24px;padding:2px 30px 12px;scroll-snap-type:x mandatory}
+.lw-shots img{height:210px;width:auto;border-radius:10px;border:1px solid var(--line);scroll-snap-align:start;flex:none}
+.lw-sec .tech{display:flex;flex-wrap:wrap;gap:8px}
+.lw-sec .tech span{font-family:var(--mono);font-size:11.5px;padding:6px 12px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--bg-2)}
+.lw-quote{border-left:2px solid var(--acc);padding:4px 0 4px 18px;margin:24px 0}
+.lw-quote p{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--ink);line-height:1.5;margin:0 0 8px}
+.lw-quote cite{font-style:normal;font-size:13px;color:var(--ink-3)}
+.lw-cta{margin-top:8px}
+@media(max-width:600px){.lw-body{padding:22px 20px 28px}.lw-hero{padding:18px 18px 0}.lw-metrics{gap:8px}.lw-metrics .mm{padding:11px 12px}.lw-metrics .v{font-size:18px}.lw-shots{margin:0 -20px 22px;padding:2px 20px 12px}.lw-shots img{height:170px}}
