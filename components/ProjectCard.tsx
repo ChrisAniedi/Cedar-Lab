@@ -92,6 +92,15 @@ const BRAND_LOGOS: Record<string, { bg: string; svg: React.ReactNode }> = {
       </svg>
     ),
   },
+  'grain-co': {
+    bg: 'linear-gradient(135deg,#D89A4A,#C8873A)',
+    svg: (
+      <svg width="19" height="19" viewBox="0 0 16 16" fill="none">
+        <path d="M3 13h10M5 10l2-7 2 7" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M4.5 8h7" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
 };
 
 export default function ProjectCard({ p, className = 'reveal' }: { p: ProjectCardData; className?: string }) {

@@ -683,5 +683,68 @@
         "Integrations & endpoints"
       ]
     ]
+  },
+  {
+    "tag": "Web",
+    "industry": "Local Services · Carpentry",
+    "title": "Grain & Co.",
+    "fullTitle": "Grain & Co. — Bespoke Carpentry",
+    "timeline": "1 Week",
+    "big": "2.1×",
+    "rl": "more consultation enquiries after launch",
+    "tech": [
+      "Next.js",
+      "Tailwind",
+      "Vercel"
+    ],
+    "mockKind": "kv",
+    "light": false,
+    "badge": "+ New",
+    "mockTitle": "Grain & Co.",
+    "a": "400+",
+    "al": "Pieces made",
+    "b": "16yr",
+    "bl": "In London",
+    "blurb": "Landing page for a London bespoke joinery & carpentry studio.",
+    "services": "Brand, Web Design, Development",
+    "goal": "To make a master carpenter's craft feel as premium online as it is in person — a warm, tactile landing page that turns admirers into booked consultations.",
+    "highlights": [
+      [
+        "400+",
+        "Bespoke pieces made"
+      ],
+      [
+        "16",
+        "Years crafting in London"
+      ],
+      [
+        "5-yr",
+        "Structural guarantee"
+      ]
+    ],
+    "metrics": [
+      [
+        "2.1×",
+        "more enquiries"
+      ],
+      [
+        "400+",
+        "bespoke pieces"
+      ],
+      [
+        "1 wk",
+        "design to launch"
+      ]
+    ],
+    "overview": "Grain & Co. is a London bespoke joinery and carpentry studio — fitted wardrobes, kitchens and alcove shelving in solid hardwood. We built a warm, tactile landing page that showcases the craft and the woods, and turns visitors into consultation requests.",
+    "challenge": "High-end joinery is a trust-and-taste purchase. The site needed to feel as crafted as the work itself — communicating quality, materials and the maker's reputation, then making it easy to book a consultation.",
+    "built": [
+      "A material-led hero showcasing the woods — oak, iroko, walnut",
+      "Services: fitted wardrobes, kitchens and alcove shelving",
+      "A trust layer — Guild of Master Craftsmen, 5-year guarantee, reviews",
+      "A simple 'free consultation' enquiry form"
+    ],
+    "quote": "The site finally looks as good as the furniture. Enquiries are better quality and better briefed.",
+    "quoteBy": "Founder, Grain & Co."
   }
 ]

@@ -1,6 +1,7 @@
 import ContactForm from '@/components/ContactForm';
 import { Arrow, Check } from '@/components/Glyphs';
 import { Icon } from '@/lib/icons';
+import { PROJECTS } from '@/lib/site-data';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -32,29 +33,41 @@ const WHY = [
 
 type Example = {
   title: string; blurb: string; tags: string[]; big: string; rl: string; timeline: string; tech: string[];
-  logo: { txt: string; bg: string }; tint: string;
-  mock: { kind: 'kv'; a: string; al: string; b: string; bl: string } | { kind: 'bars' };
+  logo: { txt: string; bg: string }; tint: string; mockHtml: string;
 };
+
+// Rough "site preview" mock in the same style as the main-site cards.
+function buildMock(title: string, kind: 'kv' | 'bars', kv?: { a: string; al: string; b: string; bl: string }) {
+  const body = kind === 'bars'
+    ? '<div class="barz"><i style="height:50%"></i><i style="height:72%"></i><i style="height:45%"></i><i style="height:90%"></i><i style="height:65%"></i><i style="height:82%"></i></div><div class="lines"><i></i><i></i></div>'
+    : `<div class="grid2"><div class="box"><div class="bl">${kv!.al}</div><div class="bv">${kv!.a}</div></div><div class="box"><div class="bl">${kv!.bl}</div><div class="bv">${kv!.b}</div></div></div><div class="lines"><i></i><i></i><i></i></div>`;
+  return `<div class="ms ms-dark"><div class="mhd"><span class="t">${title}</span><span class="b">Concept</span></div>${body}</div>`;
+}
+
+const tagsOf = (tag: string, industry: string) =>
+  Array.from(new Set([tag, ...industry.split('·').map((t) => t.trim())].filter(Boolean))).slice(0, 3);
+
+// Reuse the real Solara project so nothing is duplicated — details come straight
+// from the shared case data. Fill the other two in as their details arrive.
+const fromProject = (slug: string, txt: string, bg: string, tint: string): Example | null => {
+  const p = PROJECTS.find((x) => x.slug === slug);
+  return p ? {
+    title: p.fullTitle ?? p.title, blurb: p.blurb ?? '', tags: tagsOf(p.tag, p.industry),
+    big: p.big, rl: p.rl, timeline: p.timeline, tech: p.tech,
+    logo: { txt, bg }, tint, mockHtml: p.mock,
+  } : null;
+};
+
 const EXAMPLES: Example[] = [
-  {
-    title: 'Solara Energy', blurb: 'Solar installer landing page with a live savings calculator.',
-    tags: ['Web', 'Clean Energy'], big: '2.4×', rl: 'more quote requests after launch', timeline: '3 Weeks',
-    tech: ['Next.js', 'Tailwind', 'Vercel'], logo: { txt: 'S', bg: 'linear-gradient(135deg,#F5A623,#FF8C00)' },
-    tint: 'linear-gradient(145deg,#33291a,#14100a)', mock: { kind: 'kv', a: '2.4×', al: 'Quote reqs', b: '70%', bl: 'Bill cut' },
-  },
-  {
-    title: 'Local Trades Co.', blurb: 'One-page site built to turn searches into phone calls.',
-    tags: ['Web', 'Local Services'], big: '+38%', rl: 'more calls in the first month', timeline: '5 Days',
-    tech: ['HTML', 'CSS', 'JS'], logo: { txt: 'L', bg: 'linear-gradient(135deg,#60A5FA,#2563EB)' },
-    tint: 'linear-gradient(145deg,#1c2e46,#0b0f17)', mock: { kind: 'kv', a: '+38%', al: 'More calls', b: '5 days', bl: 'Live in' },
-  },
+  fromProject('solara', 'S', 'linear-gradient(135deg,#F5A623,#FF8C00)', 'linear-gradient(145deg,#33291a,#14100a)'),
+  fromProject('grain-co', 'G', 'linear-gradient(135deg,#D89A4A,#C8873A)', 'linear-gradient(145deg,#2c231a,#141008)'),
   {
     title: 'City Salon & Spa', blurb: 'Booking-focused site that keeps the calendar full.',
     tags: ['Web', 'Hospitality'], big: '2×', rl: 'online bookings vs before', timeline: '7 Days',
     tech: ['Next.js', 'Stripe'], logo: { txt: 'C', bg: 'linear-gradient(135deg,#F472B6,#C026D3)' },
-    tint: 'linear-gradient(145deg,#2e1f2e,#120b12)', mock: { kind: 'bars' },
+    tint: 'linear-gradient(145deg,#2e1f2e,#120b12)', mockHtml: buildMock('City Salon & Spa', 'bars'),
   },
-];
+].filter((e): e is Example => e !== null);
 
 const FAQS: [string, string][] = [
   ['How fast can you really deliver?', 'Starter sites go live in about 5 days and Growth sites in around 10 — from the moment you approve your mockup and send over your details and photos.'],
@@ -132,22 +145,7 @@ export default function LocalBusiness() {
           {EXAMPLES.map((ex, i) => (
             <div className={`pcard reveal d${i % 3}`} key={ex.title}>
               <div className="pshot" style={{ background: ex.tint }}>
-                <div className="pshot-frame"><div className="pshot-mock">
-                  <div className="ms ms-dark">
-                    <div className="mhd"><span className="t">{ex.title}</span><span className="b">Concept</span></div>
-                    {ex.mock.kind === 'bars' ? (
-                      <>
-                        <div className="barz"><i style={{ height: '50%' }} /><i style={{ height: '72%' }} /><i style={{ height: '45%' }} /><i style={{ height: '90%' }} /><i style={{ height: '65%' }} /><i style={{ height: '82%' }} /></div>
-                        <div className="lines"><i /><i /></div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="grid2"><div className="box"><div className="bl">{ex.mock.al}</div><div className="bv">{ex.mock.a}</div></div><div className="box"><div className="bl">{ex.mock.bl}</div><div className="bv">{ex.mock.b}</div></div></div>
-                        <div className="lines"><i /><i /><i /></div>
-                      </>
-                    )}
-                  </div>
-                </div></div>
+                <div className="pshot-frame"><div className="pshot-mock" dangerouslySetInnerHTML={{ __html: ex.mockHtml }} /></div>
               </div>
               <div className="ptags">{ex.tags.map((t) => <span key={t}>{t}</span>)}</div>
               <div className="pfoot">
