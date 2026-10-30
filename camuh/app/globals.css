@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-feature-settings: 'ss01';
+  }
+  ::selection { @apply bg-ink text-white; }
+  :focus-visible { outline: 2px solid #2E3092; outline-offset: 3px; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-content px-5 sm:px-8; }
+
+  /* Buttons — the dark, softly shadowed Vanity Pass button and its white twin */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[4px] px-7 py-3.5 text-[15px] font-medium
+      transition duration-300 ease-out will-change-transform;
+  }
+  .btn-dark { @apply btn bg-[#3a3a3a] text-white shadow-btn hover:-translate-y-0.5 hover:bg-ink; }
+  .btn-black { @apply btn bg-ink text-white shadow-btn hover:-translate-y-0.5 hover:bg-[#222]; }
+  .btn-white { @apply btn bg-white text-ink hover:-translate-y-0.5 hover:bg-cream; }
+  .btn-caps { @apply text-[13px] uppercase tracking-[0.04em]; }
+
+  /* Two-tone headline: dark lead + grey tail */
+  .h-two { @apply font-sans font-extrabold tracking-[-0.025em] text-ink; }
+  .h-two .muted { @apply text-smoke; }
+
+  .eyebrow { @apply text-[13px] font-semibold uppercase tracking-[0.14em]; }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
