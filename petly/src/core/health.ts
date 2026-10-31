@@ -1,6 +1,6 @@
 import { diffDays } from './dates';
 import { occursOn } from './recurrence';
-import type { DateKey, Medication, Reminder, Vaccination } from './types';
+import type { DateKey, DoseLog, Medication, Reminder, Vaccination } from './types';
 
 export const DUE_SOON_DAYS = 30;
 
@@ -64,4 +64,13 @@ export function petHealthStatus(input: {
   if (current.includes('overdue') || openReminders.some((r) => r.dueDate < input.today)) return 'attention';
   if (current.includes('dueSoon') || openReminders.some((r) => diffDays(input.today, r.dueDate) <= 7)) return 'upcoming';
   return 'good';
+}
+
+/** Scheduled dose slots for one day, with any logged outcome. */
+export function dosesForDay(m: Medication, doses: DoseLog[], date: DateKey): { time: string; log: DoseLog | null }[] {
+  if (date < m.startDate || (m.endDate && date > m.endDate) || !occursOn(m.recurrence, date)) return [];
+  return [...m.times].sort().map((time) => ({
+    time,
+    log: doses.find((d) => d.medicationId === m.id && d.date === date && d.time === time) ?? null,
+  }));
 }
