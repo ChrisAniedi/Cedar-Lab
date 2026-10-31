@@ -1,4 +1,4 @@
-import { buildEmergencyPayload, buildHandoverText, buildReportHtml, escapeHtml } from '../documents';
+import { buildEmergencyPayload, buildHandoverText, buildReportHtml, escapeHtml, handoverHtml } from '../documents';
 import { buildSampleData } from '../sample';
 
 const t = (key: string, params?: Record<string, string | number>) => (params ? `${key}(${Object.values(params).join(',')})` : key);
@@ -54,5 +54,11 @@ describe('handover', () => {
     expect(text).toContain('08:00  Tablet');
     expect(text).toContain('handover.doc.none');
     expect(text).not.toContain('HANDOVER.SECTIONS.FEEDING');
+  });
+});
+
+describe('handoverHtml', () => {
+  it('escapes the guide text', () => {
+    expect(handoverHtml('<script>')).toContain('&lt;script&gt;');
   });
 });

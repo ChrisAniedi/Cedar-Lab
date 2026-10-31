@@ -214,3 +214,8 @@ export function buildEmergencyPayload(
   if (approved.includes('microchip') && pet.microchip) lines.push(t('emergency.payload.microchip', { value: pet.microchip }));
   return lines.join('\n');
 }
+
+/** Printable wrapper for the plain-text handover guide. */
+export function handoverHtml(text: string): string {
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"/></head><body style="font-family:-apple-system,Inter,Helvetica,Arial,sans-serif;color:#252B28;margin:32px;white-space:pre-wrap;line-height:1.5;font-size:13px">${escapeHtml(text)}</body></html>`;
+}
