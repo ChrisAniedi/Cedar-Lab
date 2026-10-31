@@ -25,6 +25,11 @@ module.exports = defineConfig([
     },
   },
   {
+    // Test fixtures may use literal strings.
+    files: ['src/**/__tests__/**'],
+    rules: { 'react/jsx-no-literals': 'off' },
+  },
+  {
     // The one place allowed to render the raw RN Text.
     files: ['src/components/ui/Txt.tsx'],
     rules: { 'no-restricted-imports': 'off' },
