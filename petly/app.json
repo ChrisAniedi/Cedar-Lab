@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Petly",
+    "slug": "petly",
+    "scheme": "petly",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cedarlab.petly",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Petly uses Face ID to keep your pets' records private."
+      }
+    },
+    "android": {
+      "package": "com.cedarlab.petly",
+      "adaptiveIcon": {
+        "backgroundColor": "#285C49",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-secure-store",
+      "expo-localization",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        { "image": "./assets/splash-icon.png", "imageWidth": 160, "backgroundColor": "#F8F9F6", "dark": { "backgroundColor": "#121614" } }
+      ],
+      ["expo-notifications", { "color": "#285C49" }],
+      ["expo-local-authentication", { "faceIDPermission": "Petly uses Face ID to keep your pets' records private." }],
+      ["expo-image-picker", { "photosPermission": "Petly uses your photos so you can add a picture of your pet." }]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
