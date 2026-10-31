@@ -25,15 +25,29 @@ export function Sheet({ open, onClose, title, children }: SheetProps) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
+  // Only dismiss a sheet that is actually presented: calling dismiss() on a
+  // never-presented BottomSheetModal leaves it unable to present later.
+  const shown = useRef(false);
+
   useEffect(() => {
-    if (open) ref.current?.present();
-    else ref.current?.dismiss();
+    if (open && !shown.current) {
+      shown.current = true;
+      ref.current?.present();
+    } else if (!open && shown.current) {
+      shown.current = false;
+      ref.current?.dismiss();
+    }
   }, [open]);
+
+  const handleDismiss = () => {
+    shown.current = false;
+    onClose();
+  };
 
   return (
     <BottomSheetModal
       ref={ref}
-      onDismiss={onClose}
+      onDismiss={handleDismiss}
       backdropComponent={Backdrop}
       backgroundStyle={{ backgroundColor: colors.surface }}
       handleIndicatorStyle={{ backgroundColor: colors.border, width: 40 }}
