@@ -5,7 +5,7 @@ import { useCare } from './care';
 import { useDocuments } from './documents';
 import { SELF_ID, useHousehold } from './household';
 import { useMedications } from './medications';
-import { usePets } from './pets';
+import { usePets, type NewPet } from './pets';
 import { useReminders } from './reminders';
 import { useSettings } from './settings';
 import { useVaccinations } from './vaccinations';
@@ -82,4 +82,11 @@ export function exportAllData() {
     reminders: useReminders.getState().items,
     documents: useDocuments.getState().items,
   };
+}
+
+/** Add a pet; a weight given at creation becomes the first point on its weight chart. */
+export function createPet(input: NewPet) {
+  const pet = usePets.getState().addPet(input);
+  if (pet.weightKg) useWeights.getState().add({ petId: pet.id, date: toDateKey(new Date()), kg: pet.weightKg, note: '' });
+  return pet;
 }

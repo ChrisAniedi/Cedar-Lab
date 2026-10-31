@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { ComingSoonRow } from '@/components/ui/ComingSoonRow';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { Screen } from '@/components/ui/Screen';
-import { SegmentedControl } from '@/components/ui/SegmentedControl';
+import { OptionChips } from '@/components/ui/OptionChips';
 import { Txt } from '@/components/ui/Txt';
 import { bucketReminders, type ReminderBucket } from '@/core/reminders';
 import { useToday } from '@/hooks/useToday';
@@ -29,8 +29,9 @@ export default function Reminders() {
     <Screen edges={[]}>
       <Button label={t('reminders.add')} icon="add" onPress={() => router.push({ pathname: '/reminders/new', params: petId ? { petId } : {} })} />
       <PetFilterChips value={petId} onChange={setPetId} />
-      <SegmentedControl
-        options={(['overdue', 'today', 'upcoming', 'completed'] as const).map((b) => ({ value: b, label: `${t(`reminders.${b}`)} ${buckets[b].length}` }))}
+      <OptionChips
+        scroll
+        options={(['overdue', 'today', 'upcoming', 'completed'] as const).map((b) => ({ value: b, label: `${t(`reminders.${b}`)} · ${buckets[b].length}` }))}
         value={tab}
         onChange={setTab}
       />

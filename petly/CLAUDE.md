@@ -32,6 +32,20 @@ src/
   locales/      en.json — every user-facing string.
 ```
 
+## Screens (src/app)
+
+| Route | What |
+|---|---|
+| `welcome`, `(auth)/*`, `onboarding` | Pre-onboarding (guarded by `settings.onboardingComplete`). Auth validates, then says cloud accounts are Coming soon. |
+| `(tabs)/index` | Dashboard: greeting, pet selector, quick actions, today's care, reminders, health overview, activity. |
+| `(tabs)/pets`, `pets/[id]`, `pets/new`, `pets/[id]/edit` | Directory, passport profile (6 tabs), add/edit. |
+| `(tabs)/care`, `care/task`, `care/log` | Week calendar + one-tap completion; task form (`?id` edits); one-off log. |
+| `(tabs)/health` | Hub → `medications/*`, `vaccinations/*`, `visits/*`, `wellness/*`, `documents/*`. |
+| `(tabs)/more` | → `reminders/*`, `care-team/*`, `handover`, `emergency`, `reports`, `settings`. |
+
+Forms are `…/new` routes presented as modals; `?id=` switches them to edit mode.
+Tabs render as a bottom bar on phones and a left sidebar ≥ 900px (`useResponsive`).
+
 ## Rules (non-negotiable)
 
 1. **core/ is framework-free** and unit-tested. Business logic goes there, not in screens.
@@ -73,4 +87,25 @@ src/
   URL). Hosted public profiles with revocation are "Coming soon".
 - **Health copy** describes recorded changes only and always points to the vet. No diagnoses, no
   dosage advice.
-- Pet photos: sample pets use illustrated SVG portraits; users add real photos via expo-image-picker.
+- Pet photos: sample pets use illustrated portraits; users add real photos via expo-image-picker.
+- **Web persistence uses localStorage** (`lib/storage.web.ts`): expo-sqlite on web needs WASM plus
+  COOP/COEP headers. Native/Expo Go use kv-store. Same for `lib/share.web.ts` (blob download, print dialog).
+- **Uploaded documents are copied** into `Paths.document/documents/` (`lib/files.ts`) so they survive
+  cache clears.
+- **Bottom sheets:** `components/ui/Sheet.tsx` only calls `dismiss()` on a sheet it actually presented.
+  Calling `dismiss()` on a never-presented `BottomSheetModal` leaves it unable to `present()` later.
+- **Attribution on shared devices:** the care team screen has a "logging care as" switch
+  (`household.currentMemberId`); every completion/dose records that member.
+- **Notifications** are local (work in Expo Go). Per-type switches are applied via `core/notifyPrefs.ts`.
+  Care *tasks* don't notify; reminders do. Email notifications are Coming soon.
+- Roles are recorded and shown, but there is one device and no backend, so they are not enforced.
+
+## Testing & verification
+
+- `core/__tests__` — domain logic, contrast (both themes), sample data integrity, report/QR builders.
+- `components/ui/__tests__/Txt.test.tsx` — Txt colour resolves in JS with no provider and inside a Modal.
+- `stores/__tests__` — cross-slice lifecycle (sample removal, cascade delete).
+- `src/__tests__/conventions.test.ts` — no `dark:`, no `text-*` colour classes, no hex in TSX,
+  one exported component per file.
+- UI has been checked on the web export (`npx expo export --platform web`) with Playwright at phone and
+  desktop sizes in both themes. It has **not** yet been run on a physical device or simulator.

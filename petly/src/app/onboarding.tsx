@@ -16,8 +16,8 @@ import { Txt } from '@/components/ui/Txt';
 import { required } from '@/core/validation';
 import { ensurePermission } from '@/lib/notifications';
 import { useHousehold } from '@/stores/household';
-import { loadSampleData } from '@/stores/lifecycle';
-import { emptyPet, usePets, type NewPet } from '@/stores/pets';
+import { createPet, loadSampleData } from '@/stores/lifecycle';
+import { emptyPet, type NewPet } from '@/stores/pets';
 import { useSettings } from '@/stores/settings';
 
 const TOTAL = 9;
@@ -46,7 +46,7 @@ export default function Onboarding() {
     saveProfile();
     settings.set({ units: prefs.units, timeFormat: prefs.timeFormat, onboardingComplete: true });
     settings.setNotifications({ enabled: prefs.notifications });
-    if (pet.name.trim()) usePets.getState().addPet({ ...pet, name: pet.name.trim() });
+    if (pet.name.trim()) createPet({ ...pet, name: pet.name.trim() });
     if (prefs.notifications) await ensurePermission();
     router.replace('/(tabs)');
   };

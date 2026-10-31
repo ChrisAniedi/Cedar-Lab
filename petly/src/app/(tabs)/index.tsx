@@ -63,7 +63,7 @@ export default function Home() {
 
   const left = (
     <View className="gap-5">
-      <DailyProgressCard done={progress.done} total={progress.total} overdue={overdueTasks} />
+      {progress.total > 0 ? <DailyProgressCard done={progress.done} total={progress.total} overdue={overdueTasks} /> : null}
       <TodayCareCard occurrences={occurrences} showPet={!filter} />
       <UpcomingRemindersCard reminders={scopedReminders} />
     </View>
