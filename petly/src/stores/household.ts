@@ -17,6 +17,7 @@ interface HouseholdState {
   updateMember: (id: string, changes: Partial<Member>) => void;
   removeMember: (id: string) => void;
   setSelfName: (name: string) => void;
+  setCurrentMember: (id: string) => void;
   merge: (members: Member[]) => void;
   removeSample: () => void;
 }
@@ -34,10 +35,16 @@ export const useHousehold = create<HouseholdState>()(
         return m;
       },
       updateMember: (id, changes) => set((s) => ({ members: patch(s.members, id, changes) })),
-      removeMember: (id) => set((s) => (id === SELF_ID ? s : { members: without(s.members, id) })),
+      removeMember: (id) =>
+        set((s) => (id === SELF_ID ? s : { members: without(s.members, id), currentMemberId: s.currentMemberId === id ? SELF_ID : s.currentMemberId })),
       setSelfName: (name) => set((s) => ({ members: patch(s.members, SELF_ID, { name }) })),
+      setCurrentMember: (id) => set((s) => (s.members.some((m) => m.id === id) ? { currentMemberId: id } : s)),
       merge: (members) => set((s) => ({ members: members.reduce(upsert, s.members) })),
-      removeSample: () => set((s) => ({ members: s.members.filter((m) => !m.isSample) })),
+      removeSample: () =>
+        set((s) => {
+          const members = s.members.filter((m) => !m.isSample);
+          return { members, currentMemberId: members.some((m) => m.id === s.currentMemberId) ? s.currentMemberId : SELF_ID };
+        }),
     }),
     { name: storeKey('household'), storage: persistStorage, version: 1 },
   ),
