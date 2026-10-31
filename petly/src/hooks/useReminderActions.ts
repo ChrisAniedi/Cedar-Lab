@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
+import { shouldNotify } from '@/core/notifyPrefs';
 import { nextInstance } from '@/core/reminders';
 import type { Reminder } from '@/core/types';
 import { haptic } from '@/lib/haptics';
@@ -17,10 +18,10 @@ export function useReminderActions() {
   const f = useFormat();
   const store = useReminders();
   const pets = usePets((s) => s.pets);
-  const notificationsOn = useSettings((s) => s.notifications.enabled);
+  const prefs = useSettings((s) => s.notifications);
 
   const schedule = async (r: Reminder) => {
-    if (!notificationsOn) return;
+    if (!shouldNotify(r.kind, prefs)) return;
     const pet = pets.find((p) => p.id === r.petId)?.name ?? '';
     const id = await scheduleReminder(r, { title: t('app.name'), body: t('reminders.notificationBody', { pet, title: r.title }) });
     if (id) useReminders.getState().update(r.id, { notificationId: id });
