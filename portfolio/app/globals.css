@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design tokens — sourced from the Figma "Portfolio" frame (1:205).
+ * ink #080808 · rail #070707 · line #212121 · cream #f4e7d4 · amber #eaa64d · stone #a1998f
+ */
+:root {
+  --radius: 0.875rem;
+
+  --background: #080808;
+  --foreground: #f4e7d4;
+  --card: #111111;
+  --card-foreground: #f4e7d4;
+  --popover: #111111;
+  --popover-foreground: #f4e7d4;
+  --primary: #eaa64d;
+  --primary-foreground: #140d03;
+  --secondary: #212121;
+  --secondary-foreground: #f4e7d4;
+  --muted: #171717;
+  --muted-foreground: #a1998f;
+  --accent: #212121;
+  --accent-foreground: #f4e7d4;
+  --destructive: #e5484d;
+  --border: #212121;
+  --input: #2a2a2a;
+  --ring: #eaa64d;
+
+  --rail: #070707;
+  --stone: #a1998f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-rail: var(--rail);
+  --color-stone: var(--stone);
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.7; }
+    80%, 100% { transform: scale(2.6); opacity: 0; }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+/* Film-grain overlay — keeps the flat black from feeling digital-dead. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
